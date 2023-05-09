@@ -1,47 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import PeticaoChat from "./PeticaoChat";
+import Final from "./Final";
+import Direito from "./DireitosChat";
+import Assistente from "./Assistente";
 
 const Inicial = () => {
 
-    const navigate = useNavigate();
-
-    const handlesubmit = (e) => {
-        e.preventDefault();
-        navigate('/cadastro')
-        return (
-            handlesubmit
-        )
-    }
-    const handlesubmit2 = (e) => {
-        e.preventDefault();
-        navigate('/login')
-        return(
-            handlesubmit2
-        )
-    }
-    return(
+    return (
         <div>
-        <div className="offser-lg-3 col-lg-6">
-                <div className="card">
-                    <div className="card-header">
-                        <h1>Bem-vindo</h1>
-                    </div>
-                    <div className="card-body">
-                        <form onSubmit={handlesubmit2}>
-                            <button type="submit" className="btn btn-success">Entrar</button>
-                        </form>
-                        <form onSubmit={handlesubmit}>
-                        <button type="submit" className="btn btn-primary">Cadastrar</button>
-                        </form>
-
-                    </div>
-                    <div className="card-footer">
-                    </div>
-
-                </div>
+            <PeticaoChat/>
+            <h1>Após os chat irão*/ aparecer os direitos</h1>
+            <Direito/>
+            <h1>Após os direitos irá aparecer o editor</h1>
+            <Final/>
+            <Assistente/>
         </div>
-        
-    </div>
+
     );
 }
-
 export default Inicial;
