@@ -191,6 +191,45 @@ const Login = () => {
             return <div id="buttonDiv"></div>;
     }
 
+    const GoogleRegister = () => {
+
+        const handleCredentialResponse = (response) => {
+            console.log('Encoded JWT ID token: ' + response.credential);
+            const google_account = jwt_decode(response.credential);
+            console.log(google_account);
+        }
+
+        useEffect(() => {
+            const script = document.createElement('script');
+            script.src = 'https://accounts.google.com/gsi/client';
+            script.async = true;
+            script.defer = true;
+            document.body.appendChild(script);
+
+            script.onload = () => {
+                window.google.accounts.id.initialize({
+                    client_id:
+                        '182918162904-q8e4ga3257980c41pkg6tp3kpnj5rgji.apps.googleusercontent.com',
+                    callback: handleCredentialResponse,
+                });
+
+                window.google.accounts.id.renderButton(document.getElementById('buttonDivR'), {
+                    theme: 'outline',
+                    size: 'large',
+                    type: 'icon',
+                    shape: 'pill'
+                });
+
+                window.google.accounts.id.prompt();
+            };
+
+            return () => {
+                document.body.removeChild(script);
+            };
+        }, []);
+        return <div id="buttonDivR"></div>;
+    }
+
 
     return (
         <main>
@@ -222,9 +261,7 @@ const Login = () => {
                     <form className="form form-register" onSubmit={handleCadastro}>
                         <h2 className="form-title">Criar Conta</h2>
                         <div className="form-social">
-                            <a href="#" className="social-icon">
-                                <GoogleLogin />
-                            </a>
+                                    <GoogleRegister />
                         </div>
                         <p className="form-textt">ou cadastre seu email</p>
                         <div className="form-input-container">
