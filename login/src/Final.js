@@ -7,7 +7,7 @@ import {saveAs} from "file-saver";
 import {useRef} from "react";
 import Cookies from "js-cookie";
 
-function Final () {
+const Final = () => {
 
     const [idd, setIdd] = useState(Cookies.get("id"));
 if (localStorage.getItem("final") === null) {
@@ -72,8 +72,7 @@ const exportAsPDF = async () => {
     console.log(variavel)
 
     const [value, setValue] = useState(variavel)
-    return (
-        <div>
+    return <div>
             <div className="container">
                 <button className="btn btn-primary btn-final" onClick={exportAsPDF}>Baixar</button>
             </div>
@@ -97,7 +96,7 @@ const exportAsPDF = async () => {
 
    </div>
 
-    )
+
 }
 
 export default Final;

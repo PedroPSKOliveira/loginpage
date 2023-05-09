@@ -1,12 +1,10 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Cadastro from './Cadastro';
 import Login from './Login';
 import Home from './Home';
 import { ToastContainer } from 'react-toastify';
 import ApiPag from './ApiPag';
 import Att from './Att';
-import Inicial from './Inicial';
 import Chat from './Peticao';
 import Info from './Info';
 import Direitos from './Direitos';
@@ -15,6 +13,7 @@ import Peticao2 from './Peticao2';
 import Auth from './Auth';
 import Final from "./Final";
 import Editor from "./Editor";
+
 
 function App() {
   return (
