@@ -1,7 +1,8 @@
-import {useRef, useState} from "react";
+import {useRef, useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 
 const Login = () => {
@@ -148,6 +149,49 @@ const Login = () => {
     };
 
 
+    //Google
+
+
+    const GoogleLogin = () => {
+
+        const handleCredentialResponse = (response) => {
+            console.log('Encoded JWT ID token: ' + response.credential);
+            const google_account = jwt_decode(response.credential);
+            console.log(google_account);
+        }
+
+        useEffect(() => {
+            const script = document.createElement('script');
+            script.src = 'https://accounts.google.com/gsi/client';
+            script.async = true;
+            script.defer = true;
+            document.body.appendChild(script);
+
+            script.onload = () => {
+                window.google.accounts.id.initialize({
+                    client_id:
+                        '182918162904-q8e4ga3257980c41pkg6tp3kpnj5rgji.apps.googleusercontent.com',
+                    callback: handleCredentialResponse,
+                });
+
+                window.google.accounts.id.renderButton(document.getElementById('buttonDiv'), {
+                    theme: 'outline',
+                    size: 'large',
+                    type: 'icon',
+                    shape: 'pill'
+                });
+
+                window.google.accounts.id.prompt();
+            };
+
+            return () => {
+                document.body.removeChild(script);
+            };
+        }, []);
+        return <div id="buttonDiv"></div>;
+    }
+
+
     return (
         <main>
             <div className="login-container" id="login-container" ref={loginContainer}>
@@ -155,9 +199,7 @@ const Login = () => {
                     <form className="form form-login" onSubmit={handleLogin}>
                         <h2 className="form-title">AI Collaboration</h2>
                         <div className="form-social">
-                            <a href="#" className="social-icon">
-                                <img id="google" src="https://img.icons8.com/?size=512&id=85795&format=png" width={47.5} height={47.5}/>
-                            </a>
+                            <GoogleLogin />
                         </div>
                         <p className="form-textt">ou entre com seu email</p>
                         <div className="form-input-container">
@@ -181,7 +223,7 @@ const Login = () => {
                         <h2 className="form-title">Criar Conta</h2>
                         <div className="form-social">
                             <a href="#" className="social-icon">
-                                <img id="google" src="https://img.icons8.com/?size=512&id=85795&format=png" width={47.5} height={47.5}/>
+                                <GoogleLogin />
                             </a>
                         </div>
                         <p className="form-textt">ou cadastre seu email</p>
