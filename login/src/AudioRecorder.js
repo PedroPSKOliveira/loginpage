@@ -1,6 +1,8 @@
 // src/AudioRecorder.js
 import React, { useState, useRef } from 'react';
 import {toast} from "react-toastify";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMicrophoneLines} from "@fortawesome/free-solid-svg-icons";
 
 const AudioRecorder = ({ onUpload }) => {
     const [isRecording, setIsRecording] = useState(false);
@@ -48,11 +50,11 @@ const AudioRecorder = ({ onUpload }) => {
 
     return (
         <div>
-            <button onClick={handleStartRecording} disabled={isRecording} className={"btn btn-dark"}>
-                Iniciar gravação
+            <button onClick={handleStartRecording} disabled={isRecording}>
+                <FontAwesomeIcon icon={faMicrophoneLines}/>
             </button>
-            <button onClick={handleStopRecording} disabled={!isRecording} className={"btn btn-dark"}>
-                Parar gravação
+            <button onClick={handleStopRecording} disabled={!isRecording}>
+                <FontAwesomeIcon icon={faMicrophoneLines} style={{color: "#511f1f",}} />
             </button>
             {audioURL && (
                 <div>
