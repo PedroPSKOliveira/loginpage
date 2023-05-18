@@ -1,0 +1,73 @@
+import jwt_decode from "jwt-decode";
+import {useEffect} from "react";
+import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+
+const GoogleLogin = () => {
+
+    const navigate = useNavigate();
+
+    const handleCredentialResponse = (response) => {
+        console.log('Encoded JWT ID token: ' + response.credential);
+        const jwt = response.credential;
+        const google_account = jwt_decode(response.credential);
+        console.log(google_account);
+
+        //executar o fetch para fazer a verificação com a api de ay
+
+        fetch('https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/auth/login/social', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ACCOUNT': jwt,
+                },
+            }
+        )
+            .then(response => response.json())
+            .then(data => {
+                    Cookies.set('refresh_token', data.data, {expires: 30});
+                    toast.success("Login efetuado com sucesso!")
+                    navigate('/auth')
+                }
+            )
+            .catch((error) => {
+                    console.error('Error:', error);
+                }
+            );
+    }
+
+
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+
+        script.onload = () => {
+            window.google.accounts.id.initialize({
+                client_id:
+                    '182918162904-q8e4ga3257980c41pkg6tp3kpnj5rgji.apps.googleusercontent.com',
+                callback: handleCredentialResponse,
+            });
+
+            window.google.accounts.id.renderButton(document.getElementById('buttonDiv'), {
+                theme: 'outline',
+                size: 'large',
+                type: 'icon',
+                shape: 'pill'
+            });
+
+            window.google.accounts.id.prompt();
+        };
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+    return <div id="buttonDiv"></div>;
+}
+
+export default GoogleLogin;

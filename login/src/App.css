@@ -1,5 +1,5 @@
 :root{
-  --primary-color: #0f5cdf;
+  --primary-color: #040e36;
   --secundary-color: #FFF;
   --text-color-dark: #000;
   --text-color-light: #fff;
@@ -38,6 +38,7 @@
 .audio-button{
   align-items: flex-end;
 }
+
 
 @media (max-width:768px){
   .form{

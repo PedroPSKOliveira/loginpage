@@ -1,0 +1,39 @@
+.circle-counter {
+    position: absolute;
+    width: 23%;
+    height: 100px;
+    display: inline-block;
+}
+h4{
+    align-self: center;
+}
+
+.circle-counter svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-counter .circle-bg {
+    fill: none;
+    stroke: #f1f1f1;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.circle-counter .circle-fg {
+    fill: none;
+    stroke: #077ddd;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s;
+}
+
+.counter-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    cursor: pointer;
+}

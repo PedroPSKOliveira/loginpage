@@ -1,0 +1,45 @@
+.myH1Style {
+    font-size: 12pt;
+    text-align: justify;
+}
+
+.myPStyle {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-indent: 1.25cm;
+}
+
+.mySpanStyle {
+    display: block;
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.myH2Style {
+    font-size: 12pt;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+}
+
+.myH3Style {
+    font-size: 12pt;
+    text-align: left;
+    margin-bottom: 1.5em;
+    font-weight: normal;
+}
+
+.myOlStyle {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    list-style-type: upper-roman;
+}
+
+.myLiStyle {
+    font-size: 12pt;
+    text-align: justify;
+    margin-bottom: 0.5em;
+    padding-left: 0;
+}

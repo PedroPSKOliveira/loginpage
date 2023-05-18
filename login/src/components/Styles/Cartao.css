@@ -1,0 +1,175 @@
+.body-card {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #eee;
+}
+
+.container-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    max-width: 1100px;
+}
+.unique-form{
+    width: 100%; /* Mudado de 50% para 100% */
+    max-width: 500px; /* Adicionado */
+    height: 420px;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+    border-radius: 15px;
+    background: #fff;
+}
+
+.unique-form label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.unique-form input{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.unique-form button{
+    width: 100%;
+    padding: 15px;
+    background-color: #0061ff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1285px) {
+    .container-card {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .credit-card {
+        width: 50%;
+        margin: 20px;
+    }
+
+    .unique-form {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+.credit-card {
+    margin: 70px;
+    width: 40%;
+    max-width: 100%;
+    min-height: 250px;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #0259e6 0%, #12daf0 100%);
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.credit-card #card-number {
+    font-size: 20px;
+    margin-top: 110px;
+    word-spacing: 4px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.credit-card #card-name {
+    font-size: 18px;
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    text-transform: uppercase;
+}
+
+.credit-card #card-expiry {
+    font-size: 18px;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+.credit-card #chip {
+    background-size: cover;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+.credit-card #chip img {
+    width: 50px;
+    height: 30px;
+}
+
+.credit-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.credit-card .front,
+.credit-card .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.credit-card .back {
+    transform: rotateY(180deg);
+    background: linear-gradient(90deg, #0259e6 0%, #12daf0 100%);
+    border-radius: 15px;
+}
+
+#stripe {
+    width: 90%;
+    height: 50px;
+    background: silver;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+}
+
+#back-cvv {
+    position: absolute;
+    top: 35%;
+    left: 80%;
+    color: #fff;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1000px) {
+    .credit-card {
+        width: 70%;
+        margin: 30px;
+    }
+}
+
+@media screen and (max-width: 725px) {
+    .credit-card {
+        width: 100%;
+        margin: 30px;
+    }
+}
+
+@media screen and (max-width: 605px) {
+    .credit-card {
+        width: 100%;
+        margin: 30px;
+    }
+}
