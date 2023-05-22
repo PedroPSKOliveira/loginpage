@@ -2,14 +2,10 @@ import React, {useEffect, useState} from "react";
 import "./Styles/Chatbot.css";
 import {toast} from "react-toastify";
 import Cookies from "js-cookie";
-import TypingAnimation from "./TypingAnimation";
-
 
 const Container4 = () => {
     const [messages, setMessages] = useState([{ role: 'bot', text: 'Olá! Eu sou a Lucy. Como posso ajudá-lo?' }]);
     const [userInput, setUserInput] = useState('');
-    const [isInputDisabled, setInputDisabled] = useState(false);
-
 
     const getResponse2 = async (input) => {
         setUserInput(userInput.toLowerCase().trim())
@@ -44,11 +40,10 @@ const Container4 = () => {
         setMessages([
             ...messages,
             { role: 'user', text: userInput },
-            { role: 'bot', text: <TypingAnimation /> },
+            { role: 'bot', text: 'Digitando...' },
         ]);
 
         setUserInput('');
-        setInputDisabled(true);
 
         const botMessage = await getResponse2(userInput);
         setMessages((oldMessages) => {
@@ -56,18 +51,12 @@ const Container4 = () => {
             newMessages[newMessages.length - 1].text = botMessage;
             return newMessages;
         });
-
-        setUserInput('');
-        setInputDisabled(false);
     };
-
-
 
     return (
         <section className="container">
             <div className="container-title">
-                <h2>Assessora Jurídica</h2>
-                <img src="https://img.icons8.com/glyph-neue/64/null/technical-support.png" />
+                <h2>Assessora Jurídica <img src="https://img.icons8.com/glyph-neue/64/null/technical-support.png" className="icons-textarea"/></h2>
             </div>
             <div id="chatbot">
                 <div id="messages">
@@ -78,24 +67,15 @@ const Container4 = () => {
                         </div>
                     )}
                 </div>
-                <form id="chat-form">
+                <form id="chat-form" onSubmit={handleFormSubmit}>
                     <input
                         type="text"
                         id="user-input"
                         placeholder="Digite sua mensagem..."
                         value={userInput}
                         onChange={e => setUserInput(e.target.value)}
-                        disabled={isInputDisabled}
                     />
-                    <button
-                        className="button"
-                        id="chatbot-send-btn"
-                        type="submit"
-                        onClick={handleFormSubmit}
-                        disabled={isInputDisabled}
-                        style={{backgroundColor: isInputDisabled ? "gray" : "#040e36"}}>
-                        Enviar
-                    </button>
+                    <button className="button" id="chatbot-send-btn" type="submit">Enviar</button>
                 </form>
             </div>
         </section>

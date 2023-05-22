@@ -1,0 +1,150 @@
+.att-container{
+    display: flex;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+}
+
+.att-header {
+    background: #040e36;
+    padding: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Calibri', sans-serif;
+}
+
+.header h1 {
+    font-weight: normal;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    max-width: 500px;
+    height: 60%;
+    border: none;
+    border-radius: 3px;
+    box-shadow: -2px 3px 10px rgb(204, 204, 204);
+    padding: 20px;
+    position: relative;
+}
+
+.att-title {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #07216e;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form label {
+    position: relative;
+}
+
+.form label .input {
+    width: 300px;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 2px solid rgba(105, 105, 105, 0.397);
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.form label .input:focus {
+    border-color: #07216e;
+}
+
+
+.form label .input + span {
+    position: absolute;
+    left: 10px;
+    top: 18px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.form label .input:valid + span {
+    color: #0d319f;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    background-color: #07216e;
+    padding: 6px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    transform: .3s ease;
+}
+
+.submit:hover {
+    background-color: #082783;
+}
+
+.button-delete{
+    background: #b60404;
+}
+
+.button-delete:hover{
+    background: #d50202;
+}
+
+/*-----------------------*/
+.att-navigation {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.nav-link {
+    margin-top: 15px;
+    margin-left:50px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-link.active {
+    color: #2041a2;
+}
+
+.nav-link:hover {
+    color: #07216e;
+}
+
+.highlighter {
+    position: absolute;
+    height: 2px;
+    background-color: #2041a2;
+    bottom: 0;
+    transition: all 0.3s ease;
+}
+
+
+

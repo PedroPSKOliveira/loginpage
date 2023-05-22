@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import logo from './img/chip-de-cartao-de-credito.png';
+import chip from './img/chip-de-cartao-de-credito.png';
 import './Styles/Cartao.css';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 
 const PaymentForm = () => {
-    const [name, setName] = useState('Seu Nome');
-    const [number, setNumber] = useState('XXXX-XXXX-XXXX-XXXX');
-    const [expiry, setExpiry] = useState('XX/XX');
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [expiry, setExpiry] = useState('');
 
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
 
-    const [cvv, setCvv] = useState('XXX');
+    const [cvv, setCvv] = useState('');
     const [flipped, setFlipped] = useState(false);
 
     const navigate = useNavigate();
@@ -50,10 +50,49 @@ const PaymentForm = () => {
         });
     }
 
+    const handleNameChange = (event) => {
+        setName(event.target.value.replace(/[^a-zA-Z\s]/g, ''));
+    };
+
+    const handleNumberChange = (event) => {
+        setNumber(event.target.value.replace(/[^\d]/g, '').replace(/(\d{4})/g, '$1 ').trim());
+    };
+
+    const handleExpiryChange = (event) => {
+        const value = event.target.value.replace(/[^\d]/g, '');
+        setExpiry(value.length > 2 ? value.slice(0, 2) + '/' + value.slice(2) : value);
+    };
+
+    const handleCvvChange = (event) => {
+        setCvv(event.target.value.replace(/[^\d]/g, ''));
+    };
+
+    const handleCvvFocus = () => {
+        setFlipped(true);
+    };
+
+    const handleCvvBlur = () => {
+        setFlipped(false);
+    };
 
     return (
         <body className={"body-card"}>
         <div className="container-card">
+            <div className={`credit-card ${flipped ? 'flipped' : ''}`} id="credit-card">
+                <div className="front">
+                    <div id="chip"><img src={chip} alt="chip de cartão de crédito"></img></div>
+                    <div id="card-number">{number.length > 0 ? number : '0000 0000 0000 0000'}</div>
+                    <div id="card-name">{name.length > 0 ? name : 'nome'}</div>
+                    <div id="card-expiry">{expiry.length > 0 ? expiry : 'MM/AA'}</div>
+                </div>
+
+
+                <div className="back">
+                    <div id="stripe"></div>
+                    <div id="back-cvv">{cvv.length > 0 ? cvv : '000'}</div>
+                </div>
+            </div>
+
             <form id="payment-form" className={"unique-form"}>
                 <label htmlFor="name">Nome do titular</label>
                 <input
@@ -61,7 +100,7 @@ const PaymentForm = () => {
                     id="name"
                     maxLength="21"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleNameChange}
                     required
                 />
 
@@ -69,9 +108,9 @@ const PaymentForm = () => {
                 <input
                     type="text"
                     id="number"
-                    maxLength="16"
+                    maxLength="19"
                     value={number}
-                    onChange={(e) => setNumber(e.target.value)}
+                    onChange={handleNumberChange}
                     required
                 />
 
@@ -79,9 +118,9 @@ const PaymentForm = () => {
                 <input
                     type="text"
                     id="expiry"
-                    maxLength="7"
+                    maxLength="5"
                     value={expiry}
-                    onChange={(e) =>  setExpiry(e.target.value)}
+                    onChange={handleExpiryChange}
                 />
 
                 <label htmlFor="cvv">CVV</label>
@@ -90,9 +129,9 @@ const PaymentForm = () => {
                     id="cvv"
                     maxLength="3"
                     value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
-                    onFocus={() => setFlipped(true)}
-                    onBlur={() => setFlipped(false)}
+                    onChange={handleCvvChange}
+                    onFocus={handleCvvFocus}
+                    onBlur={handleCvvBlur}
                     required
                 />
 
@@ -104,3 +143,7 @@ const PaymentForm = () => {
 };
 
 export default PaymentForm;
+
+
+
+

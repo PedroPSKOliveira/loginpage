@@ -16,6 +16,11 @@ const Login = () => {
     const [name, setName] = useState(""); // Estado para o nome do usuário
     const [email, setEmail] = useState(""); // Estado para o campo de email do usuário
     const [password, setPassword] = useState(""); // Estado para o campo de senha do usuário
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisiblity = () => {
+        setShowPassword(showPassword ? false : true);
+    };
     const navigate = useNavigate(); // Hook do React Router para navegar para diferentes rotas
     const [oab, setOab] = useState(""); // Estado para a identificação da OAB do usuário
 
@@ -182,7 +187,19 @@ const Login = () => {
                         <p className="form-textt">ou entre com seu email</p>
                         <div className="form-input-container">
                             <input type="email" className="form-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                            <input type="password" className="form-input" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <div className="password-wrapper">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    className="form-input"
+                                    placeholder="Senha"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <i
+                                    className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                                    onClick={togglePasswordVisiblity}
+                                />
+                            </div>
                         </div>
                         <a href="#" className="form-link">
                             Esqueci minha senha

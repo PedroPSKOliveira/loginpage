@@ -5,6 +5,9 @@ import App from './App';
 import 'react-toastify/dist/ReactToastify.css';
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev";
+import {Analytics, inject} from '@vercel/analytics';
+
+inject();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

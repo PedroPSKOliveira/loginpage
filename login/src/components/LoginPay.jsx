@@ -33,7 +33,7 @@ const LoginPay = () => {
             // Agora você pode acessar as informações do plano selecionado aqui
             console.log(planoSelecionado.titulo)
             Cookies.set('plano', planoSelecionado.value);
-            navigate('/pay');
+            navigate('/pagamento');
         }
     }, [planoSelecionado]);
 

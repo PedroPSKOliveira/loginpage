@@ -3,26 +3,29 @@ import './Styles/Header.css';
 import logo from './img/logo3.png';
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
-
-const LOGOUT_API = "https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/auth/logout";
-const REFRESH_TOKEN = Cookies.get("refresh_token");
-
-
-
-const Header = () => {
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faUser} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import { faCreditCard} from '@fortawesome/free-solid-svg-icons';
+const Header = ({openModal}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isPainelOpen, setIsPainelOpen] = useState(false);
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
+    const [isContatoOpen, setIsContatoOpen] = useState(false);
+    const [nome, setNome] = useState('Pedro');
+    const [email, setEmail] = useState('ped@ped');
+    const [cartao, setCartao] = useState('1234--1234');
     const [plano, setPlano] = useState('');
     const [interacoes, setInteracoes] = useState();
     const [dig, setDig] = useState();
     const navigate = useNavigate();
 
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
     useEffect(() => {
-        fetch('https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/pay/find',
+        fetch(`https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/pay/find`,
             {
                 method: 'GET',
                 headers: {
@@ -33,15 +36,12 @@ const Header = () => {
             return res.json();
         }).then((res) => {
                 console.log(res);
-                if (res.code === 200) {
-                    setNome(res.data.nome);
-                    setEmail(res.data.email);
-                    setPlano(res.data.signature);
-                    setInteracoes(res.data.interactions);
-                    setDig(res.data.card_number);
-                } else {
-                    navigate('/');
-                }
+                setNome(res.data.nome);
+                setEmail(res.data.email);
+                setCartao(res.data.cartao);
+                setPlano(res.data.signature);
+                setInteracoes(res.data.interactions);
+                setDig(res.data.card_number);
             }
         ).catch((err) => {
             console.log(err);
@@ -49,9 +49,13 @@ const Header = () => {
     }, []);
 
 
+    const openUpdateDataModal = () => {
+        setModalIsOpen(true);
+    }
 
-
-
+    const closeModal = () => {
+        setModalIsOpen(false);
+    }
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -61,49 +65,37 @@ const Header = () => {
         return isMenuOpen ? "nav-list open" : "nav-list";
     };
 
-
-
     const togglePainelDropdown = (e) => {
         e.preventDefault();
         setIsPainelOpen(!isPainelOpen);
+        console.log("Dropdown clicked");
     };
 
+    const toggleContatoDropdown = (e) => {
+        e.preventDefault();
+        setIsContatoOpen(!isContatoOpen);
+    };
 
+    const setIndo = (  ) => {
+        setNome('Pedro');
+        setEmail('ped@ped')
+        setCartao('1234--1234');
+    }
 
-    const handleNavMobileClick = () => {
-        if (window.innerWidth <= 800) {
-            handleMenuToggle();
-        }
+    const handleNavMobileClick = (e) => {
+        e.preventDefault();
+        handleMenuToggle();
     };
 
     const s = () => {
         navigate('/atualizar');
     }
 
-
-    const fetchLogout = async () => {
-        Cookies.remove("Authorization");
-        try {
-            const response = await fetch(LOGOUT_API, {
-                method: 'GET',
-                headers: {
-                    "Token": REFRESH_TOKEN,
-                },
-            });
-            const data = await response.json();
-            Cookies.remove("refresh_token");
-            Cookies.remove("plano");
-            Cookies.remove("peticao");
-            Cookies.remove("planoc");
-            Cookies.remove("user_id");
-            Cookies.remove("Assinatura");
-            Cookies.remove("id");
-            navigate('/');
-            return data;
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
+    const p = () => {
+        navigate('/planoCliente');
+    }
+    const q = () => {
+        navigate('/home');
     }
 
     return (
@@ -111,7 +103,9 @@ const Header = () => {
         <section className="navigation">
             <div className="nav-container">
                 <div className="brand">
-                    <img src={logo} alt="Ai Collaboration Logo"></img>
+                    <a>
+                    <img src={logo} alt="Smart Petição Logo" onClick={q}></img>
+                    </a>
                 </div>
                 <nav>
                     <div className="nav-mobile" onClick={handleNavMobileClick}>
@@ -124,41 +118,37 @@ const Header = () => {
                             <a href="#!" onClick={togglePainelDropdown}>
                                 Usuário
                             </a>
-                            <ul className={`navbar-dropdown${isPainelOpen ? " show" : ""}`}>
-                                <li>
-                                    <a href="#!" style={{width: "300px", display: "inline-block"}}>{nome}</a>
+                            <ul className={`dropdown-content${isPainelOpen ? " show" : ""}`}>
+
+                            <li>
+                                    <a href="#!" style={{width: "300px", display: "inline-block"}}><FontAwesomeIcon  icon={faUser} size="lg" style={{ cursor: 'pointer' }} /> {nome}</a>
                                 </li>
                                 <li>
-                                    <a href="#!" style={{width: "300px", display: "inline-block"}}>{email}</a>
-                                </li>
-                                <hr />
-                                <li>
-                                    <a href="#!" style={{width: "300px", display: "inline-block"}}>Plano: {plano}</a>
+                                    <a href="#!" style={{width: "300px", display: "inline-block"}}><FontAwesomeIcon  icon={faEnvelope} size="lg" style={{ cursor: 'pointer' }} /> {email}</a>
                                 </li>
                                 <li>
-                                    <a href="#!" style={{width: "300px", display: "inline-block"}}>Cartão: ****-{dig}</a>
+                                    <a href="#!" style={{width: "300px", display: "inline-block"}}><FontAwesomeIcon  icon={faCreditCard} size="lg" style={{ cursor: 'pointer' }} /> {cartao}</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <span className="vertical-line"></span>
+                            <span className={`vertical-line${isMenuOpen ? " menu-open" : ""}`}></span>
                         </li>
 
                         <li>
-                            <a href="#!" onClick={s}>Atualizar dados</a>
+                            <a href={'#'} onClick={s}>Atualizar dados</a>
                         </li>
                         <li>
-                            <span className="vertical-line"></span>
-                        </li>
-
-                        <li>
-                            <a href="#!">Ajuda</a>
+                            <span className={`vertical-line${isMenuOpen ? " menu-open" : ""}`}></span>
                         </li>
                         <li>
-                            <span className="vertical-line"></span>
+                            <a href="#!" onClick={p}>Seu Plano</a>
                         </li>
                         <li>
-                            <a href="#!" onClick={fetchLogout}>Logout</a>
+                            <span className={`vertical-line${isMenuOpen ? " menu-open" : ""}`}></span>
+                        </li>
+                        <li>
+                            <a href="#!"><FontAwesomeIcon  icon={faArrowRight} size="lg" style={{ cursor: 'pointer' }} /> Logout</a>
                         </li>
                     </ul>
                 </nav>

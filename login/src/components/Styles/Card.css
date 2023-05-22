@@ -1,131 +1,212 @@
+.container5 {
+    background-color: var(--containers-background);
+    border: var(--containers-border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: var(--all-containers-width);
+    padding: 20px;
+    margin-top: var(--containers-margin-top);
+}
+
 .block-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-
 }
 
 .block {
-    height: auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border: 2px solid #e5dfdf;
-    margin: 10px;
+    position: relative;
+    width: 30%;
+    height: 450px;
+    margin: 30px;
+    padding: 15px;
+    text-align: center;
     box-sizing: border-box;
     flex-grow: 1;
     flex-basis: calc(30% - 20px);
-    border-radius: 7px;
-}
-
-.plan {
-    box-shadow: 0 30px 30px -25px #0026ff34;
-    background-color: #fff;
-    color: #697e91;
-}
-
-.plan strong {
-    font-weight: 600;
-    color: #3e4e70;
-}
-
-.plan .inner {
-    align-items: center;
-    padding: 20px;
-    padding-top: 40px;
-    background-color: #ecf6ff;
     border-radius: 12px;
+    color: #000000;
+    box-shadow: 4px 4px 6px 4px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.block:not(.middle-card) {
+    border: 3PX SOLID #333e8d;
+}
+
+.middle-card {
+    border: 3PX SOLID #161662;
+    transform: scale(1.07);
+    z-index: 1;
+    box-shadow: 0 8px 12px #00000033, 0 4px 6px #0000001a;
+}
+@media (max-width: 1000px) {
+    .block {
+        width: 50%;
+    }
+    .block {
+        flex-basis: 100%;
+    }
+}
+
+.header {
     position: relative;
+    margin: 0;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 0;
+    border-bottom: 1px solid #000000;
+    background: transparent;
+    padding-bottom: 1rem;
+    text-align: center;
 }
 
-.plan .pricing {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #bed6fb;
-    border-radius: 99em 0 0 99em;
+.title {
+    display: block;
+    color: #2413d3;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.25rem;
+    text-transform: uppercase;
+}
+
+.price-container {
+    margin-top: 10px;
     display: flex;
-    align-items: center;
-    padding: 0.625em 0.75em;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2b3a57;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 3rem;
+    line-height: 1;
 }
 
-.plan .pricing small {
-    color: #707a91;
-    font-size: 0.75em;
-    margin-left: 0.25em;
+.price-container span:first-child {
+    margin-top: 10px;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
 }
 
-.plan .title {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #425675;
+.price-container span:last-child {
+    align-self: flex-end;
+    font-size: 3.5rem;
+    line-height: 2.5rem;
 }
 
-.plan .title + * {
-    margin-top: 0.75rem;
-}
-
-.plan .info + * {
-    margin-top: 1rem;
-}
-
-.plan .features {
+.lists {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
+    gap: 25px;
 }
 
-.plan .features li {
+.list {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 10px;
 }
 
-.plan .features li + * {
-    margin-top: 0.75rem;
+.list .card-icon{
+    font-size: 1.6rem;
 }
 
-.plan .features .icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
+.list p {
+    display: block;
 }
 
-.plan .features .icon svg {
-    width: 14px;
-    height: 14px;
+.button-container {
+    margin-top: 20px;
+    padding: 0;
 }
 
-.plan .features + * {
-    margin-top: 1.25rem;
-}
-
-.plan .action {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
-
-.plan .button {
-    background-color: #032561;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: 500;
-    font-size: 1.125rem;
-    text-align: center;
-    border: 0;
+.button-container a {
+    display: block;
+    cursor: pointer;
+    width: 95%;
+    background-color: #251a8f;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #ffffff;
     outline: 0;
-    width: 100%;
-    padding: 0.625em 0.75em;
+    border: 0;
+    border-radius: 10px;
     text-decoration: none;
 }
 
-.plan .button:hover, .plan .button:focus {
-    background-color: #052f77;
+.button-container a:hover{
+    background: #1d108f;
+}
+
+.toggle-button {
+    display: inline-flex;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #161662;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+    width: 168px;
+    height: 45px;
+    cursor: pointer;
+    position: relative;
+}
+
+.button-slider {
+    position: absolute;
+    padding: 1px;
+    height: 40px;
+    width: 78px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.monthly,
+.semiannual {
+    font-size: 1rem;
+    text-align: center;
+    color: #0e42ee;
+    background-color: transparent;
+    width: 50%;
+    z-index: 1;
+}
+
+.toggle-button .selected {
+    color: #000000;
+}
+
+.toggle-button .monthly:not(.selected),
+.toggle-button .semiannual:not(.selected) {
+    color: #fff;
+}
+
+.ribbon {
+    position: absolute;
+    top: 10px;
+    right: -0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecb717;
+    color: #000000;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.final-value{
+    display: flex;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }

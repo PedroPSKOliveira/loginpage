@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {BrowserRouter, Route, Router, Routes} from 'react-router-dom';
 import Login from './Login';
 import { ToastContainer } from 'react-toastify';
 import ApiPag from './ApiPag';
@@ -9,11 +9,22 @@ import Final from "./Final";
 import LoginPay from "./components/LoginPay";
 import PaymentForm from "./components/PaymentForm";
 import Editor from "./components/Editor";
+import {Analytics} from '@vercel/analytics/react';
+import Container1 from "./components/Container1";
+import Container3 from "./components/Container3";
+import Container2 from "./components/Container2";
+import Container5 from "./components/Container5";
+import Container4 from "./components/Container4";
+import Footer from "./components/Footer";
+import GoogleLogin from "./components/GoogleLogin";
+import GoogleRegister from "./components/GoogleRegister";
+import Header from "./components/Header";
+
 
 
 
 function App() {
-  return (
+    return (
     <div className="App">
         <ToastContainer
             position="top-right"
@@ -28,6 +39,7 @@ function App() {
             theme="dark"
         />
       <BrowserRouter>
+
       <Routes>
         <Route path='/' element={<Login/>}></Route>
         <Route path='/pagamento' element={<ApiPag/>}></Route>
@@ -36,10 +48,22 @@ function App() {
         <Route path='/auth' element={<Auth/>}></Route>
         <Route path='/edicao' element={<Final/>}></Route>
         <Route path={'/first'} element={<LoginPay/>}></Route>
-          <Route path={'/pay'} element={<PaymentForm/>}></Route>
-            <Route path={'/editor'} element={<Editor/>}></Route>
+        <Route path={'/pay'} element={<PaymentForm/>}></Route>
+        <Route path={'/editor'} element={<Editor/>}></Route>
+        <Route path={'/qwrwfasfzdfaf'} element={<Container1/>}/>
+          <Route path={'/qwrwfasfzdfafgfd'} element={<Container2/>}></Route>
+          <Route path={'/qwrwfasfzdfafsd'} element={<Container3/>}></Route>
+          <Route path={'/qwrwfasfzdfafhdt'} element={<Container4/>}></Route>
+          <Route path={'/qwrwfasfzdfafasd'} element={<Container5/>}></Route>
+          <Route path={'/qwrwfasfzdfaf3r'} element={<Container1/>}></Route>
+            <Route path={'/qwrwfasfzdfafgfd4vs'} element={<Footer/>}></Route>
+          <Route path={'/qwrwfasfzdfsdfafsd5'} element={<GoogleLogin/>}></Route>
+          <Route path={'/qwrwfasfzsegsdfafhdt6'} element={<GoogleRegister/>}></Route>
+          <Route path={'/qwrwfasfzdfafasdsdfsf7'} element={<Header/>}></Route>
       </Routes>
+
       </BrowserRouter>
+        <Analytics />
       
     </div>
   );

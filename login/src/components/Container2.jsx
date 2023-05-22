@@ -1,122 +1,124 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Styles/Style.css';
-import {useState} from "react";
-import {BrowserRouter, Route, Switch, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import {toast} from "react-toastify";
 
-function Container2({setCurrentContainer}) {
-
-    const [direitos, setDireitos] = useState([localStorage.getItem("direito0"), localStorage.getItem("direito1"), localStorage.getItem("direito2"), localStorage.getItem("direito3"), localStorage.getItem("direito4")]);
-    const [direito1, setDireito1] = useState();
-    const [direito2, setDireito2] = useState();
-    const [direito3, setDireito3] = useState();
-    const [direito4, setDireito4] = useState();
-    const [direito5, setDireito5] = useState();
+function Container2({ setCurrentContainer }) {
+    const [direitos, setDireitos] = useState(['']);
+    const [deleteCount, setDeleteCount] = useState(0);
     const navigate = useNavigate();
-    let id = Cookies.get("id");
+    const id = Cookies.get("id");
+    const token = Cookies.get("token");
 
-    fetch(`https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/peticiona/direitos/${id}`  , {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'token': Cookies.get("token"),
-        },
-    })
-        .then((response) => {
-            if (response.status === 200) {
+    useEffect(() => {
+        fetch(`https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/direitos/6467b8d316be006e359326b3`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'token': token,
+            },
+        })
+            .then(response => {
+                if (!response.ok) throw new Error(response.message);
                 return response.json();
-            } else {
-                return response.json().then((response) => {
-                    throw new Error(response.message);
-                });
-            }
-        })
-        .then((data) => {
-            console.log(data)
-            setDireito1(data.data[0])
-            setDireito2(data.data[1])
-            setDireito3(data.data[2])
-            setDireito4(data.data[3])
-            setDireito5(data.data[4])
-            setDireitos([data.data[0], data.data[1], data.data[2], data.data[3], data.data[4]])
-            const direitos = data.data.direitos;
-            direitos.forEach((value, index) => {
-                localStorage.setItem("direito" + index, value);
-                console.log(value);
+            })
+            .then(data => {
+                console.log(data);
+                setDireitos(data.data);
+
+                console.log(direitos)
+
+            })
+            .catch(error => {
+                console.error(error.message);
             });
+    }, [id, token]);
+
+    const atualizar = (i) => {
+
+        console.log(i)
+        console.log(direitos[i]);
+
+        fetch(`https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/direitos/update/6467b8d316be006e359326b3?idx=${i}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+            },
+        }).then(response => {
+            if (!response.ok) throw new Error(response.message);
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            console.log(direitos[i])
+            console.log(data.data)
+            setDireitos(prevDireitos => {
+                const updatedDireitos = [...prevDireitos];  // make a copy of the original state
+                updatedDireitos[i] = data.data;  // update the value in the copied array
+                return updatedDireitos;  // update the state with the new array
+            });
+            console.log(direitos[i])
+
+        }).catch(error => {
+                console.error(error.message);
+                toast.error("Limite atingido");
+            }
+        );
+    };
+
+
+    const remover = (i) => {
+        if (deleteCount >= 2) {
+            toast.error('Você só pode excluir 2 vezes!');
+            return;
+        }
+
+        fetch(`https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/direitos/remove/6467b8d316be006e359326b3?idx=${i}`,{
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+            }
+        }).then(response => {
+            if (!response.ok) throw new Error(response.message);
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            setDireitos(prevDireitos => prevDireitos.filter((_, index) => index !== i));
+            setDeleteCount(deleteCount + 1);
+        }).catch(error => {
+            console.error(error.message);
+            toast.error("Limite de remoção atingido");
         })
-        .catch((error) => {
-
-        });
-
-    const atualizar = (i, event) => {
-        event.preventDefault();
-        const novoDireito = prompt("Digite o novo direito:");
-        localStorage.setItem("direito" + i, novoDireito);
-        // Atualize o "direito" específico no estado
-        setDireitos((prevDireitos) => {
-            const updatedDireitos = [...prevDireitos];
-            updatedDireitos[i] = novoDireito;
-            return updatedDireitos;
-        });
-        console.log("Atualizou o direito " + (i + 1) + "!");
     };
 
-    const remover = (i, event) => {
-        event.preventDefault();
-        localStorage.removeItem("direito" + i);
-        // Remova o "direito" específico do estado
-        setDireitos((prevDireitos) => {
-            const updatedDireitos = prevDireitos.filter((_, index) => index !== i);
-            return updatedDireitos;
-        });
-        console.log("Removeu o direito " + (i + 1) + "!");
-    };
+    const handleClick = () => setCurrentContainer(3);
+    const handleClick2 = () => setCurrentContainer(1);
 
-
-    const handleClick = () => {
-        setCurrentContainer(3);
-    }
-
-    const handleClick2 = () => {
-        setCurrentContainer(1);
-    }
-
-
-return (
-            <section className="container">
-                <div>
+    return (
+        <section className="container">
+            <div>
                 <h2>Apresentando o Direito</h2>
-                <br/>
-
-
-                        {direitos.map((valor, index) => {
-                            // Renderize o "direito" apenas se tiver um valor
-                            if (valor) {
-                                return (
-                                    <div key={index}>
-                                        <li>
-                                        {valor}
-                                        &nbsp;&nbsp;<button id={index} onClick={(event) => atualizar(index, event)} className={"btn btn-outline-warning"}>
-                                            Atualizar
-                                        </button>
-                                        &nbsp;&nbsp;<button id={index} onClick={(event) => remover(index, event)} className={"btn btn-outline-danger"}>
-                                            Remover
-                                        </button>
-                                        </li>
-                                    </div>
-                                );
-                            } else {
-                                return null;
-                            }
-                        })}
-                    <br/><button className="btn btn-success" onClick={handleClick}>Gerar Petição</button>
-                    <button className="btn btn-warning" onClick={handleClick2}>Voltar</button>
-                    </div>
-
-
-
-            </section>
+                <br />
+                <div>
+                    {direitos.map((valor, index) => valor && (
+                        <div key={index}>
+                            <li>
+                                {valor}
+                                <button id={index} onClick={() => atualizar(index)} className={"btn btn-outline-warning"}>
+                                    Atualizar
+                                </button>
+                                <button id={index} onClick={() => remover(index)} className={"btn btn-outline-danger"}>
+                                    Remover
+                                </button>
+                            </li>
+                        </div>
+                    ))}
+                </div>
+                <br />
+                <button className="btn btn-success" onClick={handleClick}>Gerar Petição</button>
+                <button className="btn btn-warning" onClick={handleClick2}>Voltar</button>
+            </div>
+        </section>
     );
 }
 

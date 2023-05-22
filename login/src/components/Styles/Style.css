@@ -8,7 +8,7 @@ body {
 
 /*HEADER-NAVBAR*/
 a {
-    color: #ffffff;
+    color: #708090;
     text-decoration: none;
     transition: 0.3s;
 }
@@ -18,18 +18,10 @@ a:hover {
 }
 
 .logo {
-    width: 350px; /* define a largura máxima da imagem como 100% da largura do elemento pai */
-    height: auto; /* mantém a proporção da imagem */
+    width: 350px;
+    height: auto;
     margin-bottom: 33px;
 
-}
-
-.vertical-line {
-    display: flex;
-    height: 30px; /* altura da linha vertical */
-    border-left: 1px solid #ffffff; /* borda esquerda da linha vertical */
-    margin: 14px 10px; /* espaçamento lateral da linha vertical */
-    opacity: 0.3
 }
 
 nav {
@@ -151,8 +143,9 @@ main {
     flex-wrap: wrap;
     width: 80%;
     padding: 20px;
-    margin: 190px 10px 10px;
+    margin: 190px auto;
 }
+
 
 .editor-final {
     width: 80%;

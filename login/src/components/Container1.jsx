@@ -60,13 +60,11 @@ const Container1 = ({setCurrentContainer}) => {
         console.log(pet, lim, tutela)
         try{
             console.log(pet, lim, tutela)
-            fetch('https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/peticiona/previa', {
+            fetch('https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/previa', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': Cookies.get("Authorization"),
-                },
+                    'Content-Type': 'application/json',},
                 body: JSON.stringify({
                     transcricao: pet,
                     liminar: lim, tutela: tutela
@@ -75,24 +73,26 @@ const Container1 = ({setCurrentContainer}) => {
                 .then(response => {
                     // Check the response
                     console.log(response);
-
-                    // Then convert it to JSON
-                    return response.json();
                 })
                 .then(data => {
                     console.log(data);
-                    let id = data.data;
-                    Cookies.set('id', data.data);
-                    console.log(id);
-                    setCurrentContainer(2);
+                    if (data.status === 200) {
+                        let id = data;
+                        Cookies.set('id', data);
+                        console.log(id);
+                    //    setCurrentContainer(2);
+                    }else {
+                        toast.error("Erro ao enviar os fatos")
+                    }
+
                 })
                 .catch (err => {
                     console.log(err);
-                    toast.error("Erro ao enviar petição")
+                    toast.error("Erro ao enviar os fatos")
                 });
         } catch (err) {
             console.log(err);
-            toast.error("Erro ao enviar petição")
+            toast.error("Erro ao enviar os fatos")
         }
     };
 
@@ -232,7 +232,7 @@ const Container1 = ({setCurrentContainer}) => {
                                 id="chatbot-send-btn"
                                 type="submit"
                                     style={{backgroundColor :"#040e36", height: "47px"}}
-                                onClick={handleCLick}>
+                                onClick={handleSubmit2}>
                                 Enviar
                             </button>
                     </div>
