@@ -60,9 +60,9 @@ const Container5 = () => {
     ];
 
     const planosSemestrais = [
-        { preco: '67,90', total:'Total R$407,40', desc:'15% DE DESCONTO', titulo: 'STARTER+', value: 'SEMESTRAL_STARTER', interacoes: 60, arquivo: false, audio: false },
-        { preco: '169,75', total:'Total R$1.018,50', desc:'15% DE DESCONTO', titulo: 'MASTER+', value: 'SEMESTRAL_MASTER',interacoes: 150, arquivo: true, audio: false },
-        { preco: '339,50', total:'Total R$2037.00', desc:'15% DE DESCONTO', titulo: 'ULTIMATE+', value: 'SEMESTRAL_ULTIMATE', interacoes: 300, arquivo: true, audio: true },
+        { preco: '67,90', total:'Total R$407,40', desc:'15% DE DESCONTO', titulo: 'STARTER+', value: 'SEMESTRAL_STARTER', interacoes: 360, arquivo: false, audio: false },
+        { preco: '169,75', total:'Total R$1.018,50', desc:'15% DE DESCONTO', titulo: 'MASTER+', value: 'SEMESTRAL_MASTER',interacoes: 900, arquivo: true, audio: false },
+        { preco: '339,50', total:'Total R$2037.00', desc:'15% DE DESCONTO', titulo: 'ULTIMATE+', value: 'SEMESTRAL_ULTIMATE', interacoes: 1800, arquivo: true, audio: true },
         // Adicione mais planos semestrais aqui
     ];
 

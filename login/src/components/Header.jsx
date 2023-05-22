@@ -46,6 +46,8 @@ const Header = ({openModal}) => {
             }
         ).catch((err) => {
             console.log(err);
+            toast.error('Erro ao carregar dados do usuário, tente novamente.')
+            navigate('/');
         })
     }, []);
 
