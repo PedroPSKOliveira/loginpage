@@ -39,7 +39,7 @@ const Header = ({openModal}) => {
                 console.log(res);
                 setNome(res.data.nome);
                 setEmail(res.data.email);
-                setCartao(res.data.cartao);
+                setCartao('*** - '+res.data.card_number);
                 setPlano(res.data.signature);
                 setInteracoes(res.data.interactions);
                 setDig(res.data.card_number);

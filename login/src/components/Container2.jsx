@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import {toast} from "react-toastify";
 
+const id = Cookies.get("id");
+
 function Container2({ setCurrentContainer }) {
     const [direitos, setDireitos] = useState(['']);
     const [deleteCount, setDeleteCount] = useState(0);
@@ -12,7 +14,7 @@ function Container2({ setCurrentContainer }) {
     const token = Cookies.get("token");
 
     useEffect(() => {
-        fetch(`https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/direitos/6467b8d316be006e359326b3`, {
+        fetch(`https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/direitos/${id}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

@@ -5,7 +5,10 @@ import {toast} from "react-toastify";
 import Cookies from "js-cookie";
 import AudioRecorder from "../AudioRecorder";
 import Upload from "./Upload";
+import SplashScreen from "../SplashScreen";
 // Import any necessary images or other assets
+
+
 
 const Container1 = ({setCurrentContainer}) => {
 
@@ -18,7 +21,7 @@ const Container1 = ({setCurrentContainer}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [userPlan, setUserPlan] = useState('');
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isFetching, setIsFetching] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
 
 
@@ -57,14 +60,16 @@ const Container1 = ({setCurrentContainer}) => {
 
     const handleSubmit2 = async (event) => {
         event.preventDefault();
-        console.log(pet, lim, tutela)
-        try{
+        console.log(pet, lim, tutela);
+        setIsFetching(true);
+        console.log(isFetching);
+        try {
             console.log(pet, lim, tutela)
             fetch('https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/previa', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',},
+                    'Content-Type': 'application/json', },
                 body: JSON.stringify({
                     transcricao: pet,
                     liminar: lim, tutela: tutela
@@ -73,26 +78,33 @@ const Container1 = ({setCurrentContainer}) => {
                 .then(response => {
                     // Check the response
                     console.log(response);
+                    return response.json();
                 })
-                .then(data => {
+                .then(async data => {
                     console.log(data);
-                    if (data.status === 200) {
-                        let id = data;
-                        Cookies.set('id', data);
+                    if (data.code === 0) {
+                        let id = data.data;
+                        Cookies.set('id', data.data);
                         console.log(id);
-                    //    setCurrentContainer(2);
-                    }else {
+                        toast.success(data.message)
+                        setCurrentContainer(2);
+                        await new Promise(resolve => setTimeout(resolve, 2000)); // Ajuste aqui
+                        setIsFetching(false); // Ajuste aqui
+                    } else {
                         toast.error("Erro ao enviar os fatos")
+                        setIsFetching(false); // Ajuste aqui
                     }
 
                 })
                 .catch (err => {
                     console.log(err);
                     toast.error("Erro ao enviar os fatos")
+                    setIsFetching(false); // Ajuste aqui
                 });
         } catch (err) {
             console.log(err);
             toast.error("Erro ao enviar os fatos")
+            setIsFetching(false); // Ajuste aqui
         }
     };
 
@@ -163,7 +175,8 @@ const Container1 = ({setCurrentContainer}) => {
 
     return (
         <section className="container">
-            <div className="textarea-wrapper">
+            {isFetching ? <SplashScreen /> :
+                <div className="textarea-wrapper">
                 <form action={"#!"}>
                 <div className="others">
                     <h2>Criador de petições</h2>
@@ -238,6 +251,7 @@ const Container1 = ({setCurrentContainer}) => {
                     </div>
                 </form>
             </div>
+            }
         </section>
     );
 }

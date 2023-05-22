@@ -3,9 +3,9 @@ import './SplashScreen.css';
 
 const SplashScreen = () => {
     return (
-        <div className="splash-screen">
-            <h1>Carregando...</h1>
-        </div>
+            <div className="splash-screen">
+                <h1>Carregando...</h1>
+            </div>
     );
 };
 
