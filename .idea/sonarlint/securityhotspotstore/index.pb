@@ -49,8 +49,6 @@ H
 login/src/dev.js,a\6\a6d6b0984acbdd24a3f4d4c748028d6d525c3f48
 A
 login/src/Pay.css,f\5\f51efa34f9f3f7a39e64631bc1491a1bc9e73b98
-J
-login/src/SplashScreen.jsx,f\9\f9e9714216ad7caea8b054d4779ce409548f61e9
 A
 login/src/Pay.jsx,0\0\00012b8c1fbeeaa6616118ad2de5bab75c6da34b
 D

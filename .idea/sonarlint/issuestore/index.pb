@@ -65,8 +65,6 @@ A
 login/Server.java,5\3\531f3ef4d0c396f92863a38ce31f662c272ee5a4
 H
 login/src/setupTests.jsx,f\9\f94131f2390daccfe5cf878ec42927b91918c3a1
-J
-login/src/SplashScreen.jsx,f\9\f9e9714216ad7caea8b054d4779ce409548f61e9
 Z
 *login/src/components/Styles/TextEditor.css,d\5\d5a934ca4409cc25f302c6128ef3e3c7278c625b
 X

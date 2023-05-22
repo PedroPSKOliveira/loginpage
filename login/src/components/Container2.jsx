@@ -3,6 +3,11 @@ import './Styles/Style.css';
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import {toast} from "react-toastify";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowsRotate, faRotateRight} from "@fortawesome/free-solid-svg-icons";
+import {faPowerOff} from "@fortawesome/free-solid-svg-icons/faPowerOff";
+import {faBan} from "@fortawesome/free-solid-svg-icons/faBan";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 
 const id = Cookies.get("id");
 
@@ -98,30 +103,48 @@ function Container2({ setCurrentContainer }) {
 
     return (
         <section className="container">
-            <div>
-                <h2>Apresentando o Direito</h2>
-                <br />
-                <div>
-                    {direitos.map((valor, index) => valor && (
-                        <div key={index}>
-                            <li>
-                                {valor}
-                                <button id={index} onClick={() => atualizar(index)} className={"btn btn-outline-warning"}>
-                                    Atualizar
-                                </button>
-                                <button id={index} onClick={() => remover(index)} className={"btn btn-outline-danger"}>
-                                    Remover
-                                </button>
-                            </li>
+            <h2>Apresentando o Direito</h2>
+            <br />
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                boxSizing: 'border-box',
+                width: '100%'
+            }}>
+                {direitos.map((valor, index) => valor && (
+                    <div style={{ display: 'flex', width: '80%', marginBottom: '10px' }}>
+                        <div key={index} style={{
+                            border: '1px solid #ccc',
+                            padding: '10px',
+                            borderRadius: '5px',
+                            boxSizing: 'border-box',
+                            flex: '1',
+                            marginRight: '10px',
+                            wordWrap: 'break-word',
+                        }}>
+                            {valor}
                         </div>
-                    ))}
-                </div>
-                <br />
-                <button className="btn btn-success" onClick={handleClick}>Gerar Petição</button>
-                <button className="btn btn-warning" onClick={handleClick2}>Voltar</button>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            <button id={index} onClick={() => atualizar(index)} style={{backgroundColor: '#fafafa', border: 'none'}}>
+                                <FontAwesomeIcon icon={faRotateRight} size="xl" style={{color: "#33b1ff"}} />
+                            </button>
+                            <button id={index} onClick={() => remover(index)} style={{backgroundColor: '#fafafa', border: 'none'}}>
+                                <FontAwesomeIcon icon={faXmark} size="2xl" style={{color: "#ff0000",}} />
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
+
+            <br />
+            <button className="btn btn-success" onClick={handleClick}>Gerar Petição</button>
+            <button className="btn btn-warning" onClick={handleClick2}>Voltar</button>
         </section>
     );
+
+
+
 }
 
 export default Container2;

@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 import GoogleLogin from "./components/GoogleLogin";
 import GoogleRegister from "./components/GoogleRegister";
 import Header from "./components/Header";
+import PasswordResetPage from "./components/PasswordResetPage";
 
 
 
@@ -60,7 +61,9 @@ function App() {
           <Route path={'/qwrwfasfzdfsdfafsd5'} element={<GoogleLogin/>}></Route>
           <Route path={'/qwrwfasfzsegsdfafhdt6'} element={<GoogleRegister/>}></Route>
           <Route path={'/qwrwfasfzdfafasdsdfsf7'} element={<Header/>}></Route>
+        <Route path={'/reset-password/:id'} element={<PasswordResetPage/>}></Route>
       </Routes>
+
 
       </BrowserRouter>
         <Analytics />
