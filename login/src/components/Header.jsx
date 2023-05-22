@@ -8,14 +8,15 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faUser} from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard} from '@fortawesome/free-solid-svg-icons';
+import {toast} from "react-toastify";
 const Header = ({openModal}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isPainelOpen, setIsPainelOpen] = useState(false);
     const [isContatoOpen, setIsContatoOpen] = useState(false);
-    const [nome, setNome] = useState('Pedro');
-    const [email, setEmail] = useState('ped@ped');
-    const [cartao, setCartao] = useState('1234--1234');
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [cartao, setCartao] = useState('');
     const [plano, setPlano] = useState('');
     const [interacoes, setInteracoes] = useState();
     const [dig, setDig] = useState();
@@ -98,6 +99,27 @@ const Header = ({openModal}) => {
         navigate('/home');
     }
 
+    const handleLogout = () => {
+        Cookies.remove("Authorization");
+        Cookies.remove("Assinatura");
+        fetch(`https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/auth/logout`,{
+            method: 'GET',
+            headers: {
+                "token": Cookies.get("refresh_token"),
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((res) => {
+            console.log(res);
+            navigate('/');
+            Cookies.remove("refresh_token");
+
+        }).catch((err) => {
+            console.log(err);
+            toast.error(err.message)
+        })
+    }
+
     return (
 
         <section className="navigation">
@@ -148,7 +170,7 @@ const Header = ({openModal}) => {
                             <span className={`vertical-line${isMenuOpen ? " menu-open" : ""}`}></span>
                         </li>
                         <li>
-                            <a href="#!"><FontAwesomeIcon  icon={faArrowRight} size="lg" style={{ cursor: 'pointer' }} /> Logout</a>
+                            <a href="#!" onClick={handleLogout} ><FontAwesomeIcon  icon={faArrowRight} size="lg" style={{ cursor: 'pointer' }}/> Logout</a>
                         </li>
                     </ul>
                 </nav>

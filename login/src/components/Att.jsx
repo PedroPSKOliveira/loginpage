@@ -8,9 +8,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 
-const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, password}) => {
+const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, password, onSubmit}) => {
     const [state, setState] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    const [isChanged, setIsChanged] = useState(false);
+
 
 
     useEffect(() => {
@@ -22,12 +24,41 @@ const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, passwor
     }, [nome, oab, password]);
 
     const handleInputChange = (e, fieldName) => {
-        setState({ ...state, [fieldName]: e.target.value });
+        const newValue = e.target.value;
+        setState(prevState => {
+            const currentField = fields.find(field => field.name === fieldName);
+            const isStateChanged = Object.keys(prevState).some(key =>
+                key === fieldName ? newValue !== currentField.initialValue : false
+            );
+            setIsChanged(isStateChanged);
+            return { ...prevState, [fieldName]: newValue };
+        });
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // For password form, check if new passwords match
+        if (fields.find(field => field.name === 'newPassword')) {
+            if (state.newPassword !== state.confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+        }
+
+        onSubmit(state); // Invokes the callback function passed via props
+
+        // Clear state for password fields
+        if (fields.find(field => field.name === 'newPassword')) {
+            setState(prevState => ({...prevState, newPassword: '', confirmPassword: ''}));
+        }
+
+        console.log(state)
     };
+
+
 
     return (
 
@@ -59,7 +90,7 @@ const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, passwor
                     </label>
                 ))}
 
-                <button className={`submit ${buttonClass}`}>{buttonText}</button>
+                <button className={`submit ${buttonClass}`} disabled={!isChanged} onClick={handleSubmit}>{buttonText}</button>
 
             </form>
         </div>
@@ -108,8 +139,7 @@ const Att = () => {
                 console.log(res);
                 setNome(res.data.nome);
                 setOab('12345-BA');
-                setPassword('123456');
-                console.log(nome, oab, password);
+                console.log(nome, oab);
             }
         ).catch((err) => {
             console.log(err);
@@ -176,6 +206,7 @@ const Att = () => {
                         buttonClass="button-name"
                         fields={userDataFields}
                         nome={nome}
+                        onSubmit={(newState) => setNome(newState.newName)} // Update `nome` state
                     />
 
                     <AttForm
@@ -185,6 +216,7 @@ const Att = () => {
                         buttonClass="button-oab"
                         fields={oabDataFields}
                         oab={oab}
+                        onSubmit={(newState) => setOab(newState.newOab)} // Update `oab` state
                     />
 
                     <AttForm
@@ -194,6 +226,12 @@ const Att = () => {
                         buttonClass="button-senha"
                         fields={passwordDataFields}
                         password={password}
+                        onSubmit={(newState) => {
+                            // Update `password` state if passwords match
+                            if (newState.newPassword === newState.confirmPassword) {
+                                setPassword(newState.newPassword);
+                            }
+                        }}
                     />
 
                     <AttForm

@@ -143,7 +143,7 @@ main {
     flex-wrap: wrap;
     width: 80%;
     padding: 20px;
-    margin: 190px auto;
+    margin: 130px auto;
 }
 
 
@@ -411,6 +411,14 @@ p{
 
 .audio-button, .audio-button2 {
     margin-right: 10px; /* Ajuste este valor para o que melhor se adeque ao seu design. */
+}
+
+.toggle-button-semestral {
+    background-color: #fff;
+}
+
+.button-slider-semestral {
+    transform: translateX(100%);
 }
 
 
