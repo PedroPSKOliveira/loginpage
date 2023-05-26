@@ -1,4 +1,4 @@
-import {useRef, useState, useEffect, memo} from "react";
+import React, {useRef, useState, useEffect, memo} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
@@ -17,6 +17,8 @@ const Login = () => {
     const [email, setEmail] = useState(""); // Estado para o campo de email do usuário
     const [password, setPassword] = useState(""); // Estado para o campo de senha do usuário
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoginForm, setIsLoginForm] = useState(true);
+
 
     const togglePasswordVisiblity = () => {
         setShowPassword(showPassword ? false : true);
@@ -33,6 +35,7 @@ const Login = () => {
     const moveOverlay = () => {
         if (loginContainer.current) {
             loginContainer.current.classList.toggle("move");
+            setIsLoginForm(!isLoginForm);
         }
     };
 
@@ -176,7 +179,6 @@ const Login = () => {
         return re.test(String(email).toLowerCase());
     }
 
-
     return (
         <main>
             <div className="login-container" id="login-container" ref={loginContainer}>
@@ -202,11 +204,13 @@ const Login = () => {
                             </div>
                         </div>
                         <a href="#" className="form-link">
-                            Esqueci minha senha
+                            Esqueci Minha Senha
                         </a>
-                        <button type="submit" className="form-button" id="open-login">
-                            Entrar
-                        </button>
+                        {isLoginForm && (
+                            <button type="submit" className="form-button" id="open-login">
+                                Entrar
+                            </button>
+                        )}
                         <p className="mobile-text">
                             Não tem conta?
                             <a href="#" onClick={moveOverlay} id="open-register-mobile">

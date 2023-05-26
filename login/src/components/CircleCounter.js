@@ -3,22 +3,32 @@ import './Styles/CircleCounter.css';
 import Cookies from "js-cookie";
 
 const CircleCounter = () => {
-    const [counter, setCounter] = useState(0);
-    const [circleStroke, setCircleStroke] = useState('0 283');
-    const [count, setCount] = useState();
-    const [maxCount, setMaxCount] = useState();
-    const warningThreshold = (maxCount%80); // Ajuste esse valor conforme necessário
+    const [counter, setCounter] = useState([0, 0]);
+    const [circleStrokes, setCircleStrokes] = useState(['0 283', '0 283', '0 283']);
+    const [counts, setCounts] = useState();
+    const [maxCounts, setMaxCounts] = useState();
+    const warningThreshold = (maxCounts * 0.2); // 80% do valor máximo
 
     useEffect(() => {
-        const percent = (counter / maxCount) * 100;
-        const strokeLength = (percent * 283) / 100;
-        setCircleStroke(`${strokeLength} 283`);
+        counter.forEach((counter, i) => {
+            const percent = (counter / maxCounts) * 100;
+            const strokeLength = (percent * 283) / 100;
+            setCircleStrokes(prevStrokes => {
+                let newStrokes = [...prevStrokes];
+                newStrokes[i] = `${strokeLength} 283`;
+                return newStrokes;
+            });
+        });
     }, [counter]);
 
-    const incrementCounter = () => {
-        if (counter < maxCount) {
-            setCounter(counter + 1);
-        }
+    const incrementCounter = (i) => {
+        setCounter(prevCounter => {
+            let newCounter = [...prevCounter];
+            if (newCounter[i] < maxCounts) {
+                newCounter[i]++;
+            }
+            return newCounter;
+        });
     };
 
     useEffect(() => {
@@ -33,9 +43,14 @@ const CircleCounter = () => {
             return res.json();
         }).then((res) => {
                 console.log(res);
-                setCounter(res.data.maxInteractions - res.data.interactions)
-                setMaxCount(res.data.maxInteractions);
-                setCount(res.data.interactions);
+                setCounter(prevCounter => {
+                    let newCounter = [...prevCounter];
+                    newCounter[0] = res.data.maxInteractions
+                    newCounter[1] = res.data.maxInteractions - res.data.interactions
+                    return newCounter;
+                });
+                setMaxCounts(res.data.maxInteractions);
+                setCounts(res.data.interactions);
 
             }
         ).catch((err) => {
@@ -43,28 +58,39 @@ const CircleCounter = () => {
         })
     }, []);
 
-    const circleColor = counter >= warningThreshold ? 'red' : '#077ddd';
+    const circleColors = counter.map((counter, i) => {
+        if (i === 0) {
+            return '#251a8f';
+        } else {
+            return counts <= warningThreshold ? '#bf291f' : '#251a8f';
+        }
+    });
 
     return (
-        <div className="circle-counter">
-            <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" className="circle-bg" />
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    className="circle-fg"
-                    style={{ strokeDasharray: circleStroke, stroke: circleColor }}
-                />
-            </svg>
-            <div className="counter-value" onClick={incrementCounter}>
-                {counter}
-            </div>
-            <h4>
-                Interações restantes: <span>{count}</span>
-            </h4>
+        <section className="container">
+            {counter.map((counter, i) => (
+                <div key={i} className="circle-counter">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" className="circle-bg" />
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            className="circle-fg"
+                            style={{ strokeDasharray: circleStrokes[i], stroke: circleColors[i] }}
+                        />
+                    </svg>
+                    <div className="counter-value">
+                        {counter}
+                    </div>
+                    <h4>
+                        {i === 0 ? 'Número máximo de interações: ' : 'Interações restantes: '}
+                        <span>{i === 0 ? maxCounts : counts}</span>
+                    </h4>
+                </div>
+            ))}
+        </section>
 
-        </div>
     );
 };
 

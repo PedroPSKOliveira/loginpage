@@ -1,19 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Styles/Att.css';
 import Header from "./Header";
+import BrightnessControl from "./BrightnessControl";
 import Cookies from "js-cookie";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-
-
 
 const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, password, onSubmit}) => {
     const [state, setState] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [isChanged, setIsChanged] = useState(false);
-
-
 
     useEffect(() => {
         const stateInitialValues = fields.reduce(
@@ -34,7 +30,6 @@ const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, passwor
             return { ...prevState, [fieldName]: newValue };
         });
     };
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,41 +53,34 @@ const AttForm = ({id, title, fields, buttonText, buttonClass, nome, oab, passwor
         console.log(state)
     };
 
-
-
     return (
-
         <div className="att-container">
             <form className="form" onSubmit={handleSubmit}>
                 <p className="att-title">{title}</p>
-
                 {fields.map((field, index) => (
-                    <label key={index}>
-                        <div style={{display: 'flex', alignItems: 'center'}}>
-                            <input
-                                required
-                                type={field.type === 'password' && !showPassword ? 'password' : 'text'}
-                                className="input"
-                                value={state[field.name]}
-                                readOnly={field.name.includes("old")}
-                                onChange={(e) => handleInputChange(e, field.name)}
-                            />
-                            {field.type === 'password' && (
-                                <i
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    style={{marginLeft: '5px', cursor: 'pointer'}}
-                                >
-                                    {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
-                                </i>
-                            )}
-                        </div>
-                        <span>{field.label}</span>
-                    </label>
+                    <div key={index} className="att-input-container">
+                        <input
+                            required
+                            className="att-input"
+                            type={field.type === 'password' && !showPassword ? 'password' : 'text'}
+                            value={state[field.name]}
+                            readOnly={field.name.includes("old")}
+                            placeholder={field.label} // Moving the label to the placeholder
+                            onChange={(e) => handleInputChange(e, field.name)}
+                        />
+                        {field.type === 'password' && (
+                            <span
+                                className="toggle-visibility-icon"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+            </span>
+                        )}
+                    </div>
                 ))}
-
-                <button className={`submit ${buttonClass}`} disabled={!isChanged} onClick={handleSubmit}>{buttonText}</button>
-
+                <button className={`att-submit ${buttonClass}`} disabled={!isChanged} onClick={handleSubmit}>{buttonText}</button>
             </form>
+            <BrightnessControl />
         </div>
     );
 };
@@ -102,7 +90,7 @@ const PaymentUpdate = () => {
         <div className="att-container">
             <AttForm
                 id={1}
-                title="Adicione Novo Cartão"
+                title="Adicione novo cartão"
                 buttonText="Adicionar Cartão"
                 buttonClass="button-name"
                 fields={[
@@ -238,7 +226,7 @@ const Att = () => {
                         id={4}
                         title="Deletar conta"
                         buttonText="Deletar Conta"
-                        buttonClass="button-delete"
+                        buttonClass="att-button-delete"
                         fields={deleteAccountFields}
                     />
                 </>

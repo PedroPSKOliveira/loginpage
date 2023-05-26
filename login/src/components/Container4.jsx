@@ -60,41 +60,41 @@ const Container4 = () => {
 
 
     return (
-        <section className="container">
-        <div className="container-title">
-        <h2>Assessora Jurídica</h2>
-    <img src="https://img.icons8.com/glyph-neue/64/null/technical-support.png" />
-</div>
-    <div id="chatbot">
-        <div id="messages">
-            {messages.map((message, index) =>
-                <div key={index} className={`message ${message.role}-message`}>
-                    <i className={`fas fa-${message.role === 'bot' ? 'robot' : 'user'}`}></i>
-                    {message.text}
+        <section className="container4">
+            <div className="container-title">
+                <h2>Assessora Jurídica</h2>
+                <img className="icon-chatbot" src="https://img.icons8.com/glyph-neue/64/null/technical-support.png" />
+            </div>
+            <div id="chatbot">
+                <div id="messages">
+                    {messages.map((message, index) =>
+                        <div key={index} className={`message ${message.role}-message`}>
+                            <i className={`fas fa-${message.role === 'bot' ? 'robot' : 'user'}`}></i>
+                            {message.text}
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
-        <form id="chat-form">
-            <input
-                type="text"
-                id="user-input"
-                placeholder="Digite sua mensagem..."
-                value={userInput}
-                onChange={e => setUserInput(e.target.value)}
-                disabled={isInputDisabled}
-            />
-            <button
-                className="button"
-                id="chatbot-send-btn"
-                type="submit"
-                onClick={handleFormSubmit}
-                disabled={isInputDisabled}
-                style={{backgroundColor: isInputDisabled ? "gray" : "#040e36"}}>
-                Enviar
-            </button>
-        </form>
-    </div>
-</section>
+                <form id="chat-form">
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Digite sua mensagem..."
+                        value={userInput}
+                        onChange={e => setUserInput(e.target.value)}
+                        disabled={isInputDisabled}
+                    />
+                    <button
+                        className="button"
+                        id="chatbot-send-btn"
+                        type="submit"
+                        onClick={handleFormSubmit}
+                        disabled={isInputDisabled}
+                        style={{backgroundColor: isInputDisabled ? "rgba(3,9,87,0.89)" : "#030957"}}>
+                        Enviar
+                    </button>
+                </form>
+            </div>
+        </section>
     );
 };
 

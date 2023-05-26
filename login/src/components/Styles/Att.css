@@ -16,6 +16,24 @@
     font-family: 'Calibri', sans-serif;
 }
 
+.att-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.att-input-container input{
+    background-color: #fff;
+    font-size: 0.875rem;
+    width: 100%;
+    max-width: 250px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgba(229, 10, 10, 0.05);
+    outline: none;
+    padding-right: 2.5rem;
+}
+
 .header h1 {
     font-weight: normal;
 }
@@ -50,7 +68,7 @@
     position: relative;
 }
 
-.form label .input {
+.form label{
     width: 300px;
     padding: 10px 10px 20px 10px;
     outline: 0;
@@ -59,37 +77,43 @@
     transition: border-color 0.3s;
 }
 
-.form label .input:focus {
-    border-color: #07216e;
+/*-------------------------*/
+.att-input {
+    padding: 20px;
+    width: 100%;
+    border: 2px solid #c5c5c5;
+    background: none;
+    font-size: 20px;
+    color: black;
+    transition: all 0.3s ease;
 }
 
+.att-input:focus {
+    outline: none;
+    border: 2px solid #07216e;
+}
 
-.form label .input + span {
+.att-input::placeholder {
+    color: #989696;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.att-input:focus::placeholder {
+    transform: translateY(10px);
+    font-size: 11px;
+}
+
+.toggle-visibility-icon {
     position: absolute;
-    left: 10px;
-    top: 18px;
-    color: grey;
-    font-size: 0.9em;
-    cursor: text;
-    transition: 0.3s ease;
+    right: 10px;
+    cursor: pointer;
+    color: #989696;
 }
 
-.form label .input:placeholder-shown + span {
-    top: 15px;
-    font-size: 0.9em;
-}
+/*----------------------------------------------*/
 
-.form label .input:focus + span,.form label .input:valid + span {
-    top: 30px;
-    font-size: 0.7em;
-    font-weight: 600;
-}
-
-.form label .input:valid + span {
-    color: #0d319f;
-}
-
-.submit {
+.att-submit {
     border: none;
     outline: none;
     background-color: #07216e;
@@ -98,17 +122,18 @@
     color: #fff;
     font-size: 13px;
     transform: .3s ease;
+    cursor:pointer;
 }
 
-.submit:hover {
+.att-submit:hover {
     background-color: #082783;
 }
 
-.button-delete{
+.att-button-delete{
     background: #b60404;
 }
 
-.button-delete:hover{
+.att-button-delete:hover{
     background: #d50202;
 }
 

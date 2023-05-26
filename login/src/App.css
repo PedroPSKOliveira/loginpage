@@ -15,6 +15,7 @@
   background-color: var(--secundary-color);
   padding: 55px 0;
   transition: 1s;
+  position: absolute;
 }
 
 
@@ -91,6 +92,7 @@
   height: 100%;
   width: 100%;
   display: flex;
+  position: absolute;
 }
 .form-input{
   width: 300px;

@@ -4,29 +4,6 @@ import './Styles/Style.css';
 const Container = () => {
     return(
         <body>
-        <header>
-            <nav>
-                <img src="./img/logo1.png" alt="" className="logo"/>
-
-                    <div className="mobile-menu">
-                        <div className="line1"></div>
-                        <div className="line2"></div>
-                        <div className="line3"></div>
-                    </div>
-                    <ul className="nav-list">
-                        <li><a href="#" className="btn-nav-border">Criar</a></li>
-                        <li><span className="vertical-line"></span></li>
-                        <li><a href="#" className="btn-nav-border">Painel</a></li>
-                        <li><span className="vertical-line"></span></li>
-                        <li><a href="#" className="btn-nav-border">Contato</a></li>
-                        <li><span className="vertical-line"></span></li>
-                        <li><a href="#" className="btn-nav-border">Ajuda</a></li>
-                        <li><span className="vertical-line"></span></li>
-                        <li><a href="#" className="btn-nav-border">Logout</a></li>
-                    </ul>
-            </nav>
-        </header>
-
         <main>
             <section className="container">
                 <div className="textarea-wrapper">
@@ -133,9 +110,6 @@ const Container = () => {
                 </div>
             </section>
 
-            <section className="container">
-                <p>AI Collaboration - @Copyright - 2023</p>
-            </section>
         </main>
 
         <script src="chatbot.js"></script>

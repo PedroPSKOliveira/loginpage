@@ -58,15 +58,6 @@ const AudioRecorder = ({ onUpload, isUploading }) => {
         }
     };
 
-    {/*
-    {audioURL && (
-        <div>
-            <h3>Áudio gravado:</h3>
-            <audio src={audioURL} controls />
-        </div>
-    )}
-    */}
-
     return (
         <div>
             <button

@@ -3,26 +3,12 @@
 login/yarn.lock,1\3\13ea67ce96c9338a377582ed58dbc5eadd3cbc9b
 @
 login/.gitignore,a\f\afdcc304bb6f2b6f50365915ebc068e22e4baab3
-D
-login/src/ApiPag.jsx,a\7\a7e0ece55f2266a7330c7739745fc6cf1abdb986
-A
-login/src/App.css,7\d\7dd5a5d5fb161466c160f32cd234cf168bc1a748
-K
-login/src/AudioRecorder.jsx,8\a\8aab4dbba7ab07d8784b6193e90f7f25e342c3c3
 B
 login/src/Auth.jsx,1\c\1c95d7d1cda41879b42f578bb8a74ddb41819155
 T
 $login/src/components/Styles/Chat.css,0\f\0f1531fe8e6148d9f589ede528872f71e8d98bf9
 J
 login/src/CheckoutForm.jsx,3\8\3836fdabf0f2646ac6997a579cfaf2a4d7e77468
-]
--login/src/components/Styles/CircleCounter.css,8\5\8590189a67aebf533f05015768c1d31019c09363
-U
-%login/src/components/CircleCounter.js,4\e\4e908729c99270aca1215384bcc0a9f37e25d14f
-R
-"login/src/components/Container.jsx,8\2\82c9eb9495018c66d88bc3450ca59e1158f27bd7
-S
-#login/src/components/Container3.jsx,4\4\44da345fbbb9f5cd5b893b7872a35ae1c8e224d2
 @
 login/src/dev.js,a\6\a6d6b0984acbdd24a3f4d4c748028d6d525c3f48
 O
@@ -31,8 +17,6 @@ C
 login/src/Final.jsx,5\f\5f44df96fcef7302f2c69b3d0a8a50c4dd0333ab
 V
 &login/src/components/Styles/Footer.css,d\d\dd99654a59a62ef68a33408566eee258ea4012e0
-O
-login/src/components/Footer.jsx,d\3\d3f87ab785f5b60b278ad641b788dc2dcef56ed8
 T
 $login/src/components/GoogleLogin.jsx,6\c\6cc02799de98b84c29424fd351ec46626c0dd6a9
 W
@@ -41,8 +25,6 @@ W
 login/In.js,d\a\da75b9c520495f7727128e1671437a134fc4ebef
 C
 login/src/index.css,b\b\bb6a1f02a754b1502386037699c9c716cc057729
-E
-login/src/Inicial.jsx,5\6\56931a5d66d39bd8dbb599cf03d9c8bb54c57cda
 R
 "login/src/components/LoginForm.jsx,3\2\32bc149dacb0d4d1dc83864cd912d9c99ce9ad5f
 V
@@ -65,11 +47,21 @@ A
 login/Server.java,5\3\531f3ef4d0c396f92863a38ce31f662c272ee5a4
 H
 login/src/setupTests.jsx,f\9\f94131f2390daccfe5cf878ec42927b91918c3a1
-Z
-*login/src/components/Styles/TextEditor.css,d\5\d5a934ca4409cc25f302c6128ef3e3c7278c625b
 X
 (login/src/components/TypingAnimation.jsx,7\8\787bef15223bfdc056952dda4991252e1bd9b4b6
 [
 +login/src/components/Styles/TypingStyle.css,9\3\932afb31464966f118fa07c9e5974b8b0f24a5b5
-O
-login/src/components/Upload.jsx,8\e\8e9c7b5d33c8d27f164b6cdb5c742fa4a539a9dd
+V
+&login/src/components/Styles/Cartao.css,4\6\46552f2f2d3974441b28a68a480b5f1470b9a7dd
+G
+login/public/index.html,a\1\a1f7fda28ec42fac7e3af158796c4917f797426e
+B
+login/src/index.js,2\9\29dd77eb52c52844d2d96fb8ff8a98cae8c2ca58
+\
+,login/src/components/Styles/planoCliente.css,2\c\2c4dd4c1d37bdc82eb68f2cd3a57112642787a62
+U
+%login/src/components/planoCliente.jsx,c\f\cf9b1464f38fdcaad20c86a1e2c77359cc1256f0
+J
+login/src/Inicial.test.jsx,2\e\2ea4faa7bab144c50e2c62cdfba396694cb7825e
+J
+login/src/SplashScreen.jsx,f\9\f9e9714216ad7caea8b054d4779ce409548f61e9

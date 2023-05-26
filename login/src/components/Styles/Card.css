@@ -1,13 +1,13 @@
 .container5 {
-    background-color: var(--containers-background);
-    border: var(--containers-border);
+    background-color: #fefefe;
+    border: 2px solid #e5dfdf;
     border-radius: 10px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    width: var(--all-containers-width);
+    width: 80%;
     padding: 20px;
-    margin-top: var(--containers-margin-top);
+    margin: 20px auto;
 }
 
 .block-container {
@@ -193,6 +193,24 @@
     align-items: center;
     justify-content: center;
     background-color: #ecb717;
+    color: #000000;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.ribbon-red {
+    position: absolute;
+    top: 10px;
+    right: -0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e03e2d;
     color: #000000;
     border-radius: 5px;
     font-size: 0.9rem;

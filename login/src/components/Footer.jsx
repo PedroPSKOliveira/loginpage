@@ -15,14 +15,14 @@ const Footer = () => {
             <div className="footer">
                 <div className="footer-item">
                     <FontAwesomeIcon icon={faMapMarkerAlt} size="lg" style={{ cursor: 'pointer' }} />
-                    <a href="#" style={{ textDecoration: 'none', color: '#ffffff', cursor: 'pointer' }}>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Demetrio+C.+Guerrieri,+94+-+Centro,+Eunápolis+-+BA,+45825-000" target="_blank" style={{ textDecoration: 'none', color: '#ffffff', cursor: 'pointer' }}>
                         Av. Demetrio C. Guerrieri, 94 - Centro<br/>Eunápolis - BA, 45825-000
                     </a>
                 </div>
                 <div className="footer-item">
                     <FontAwesomeIcon icon={faEnvelope} size="lg" style={{ cursor: 'pointer' }} />
-                    <a href="#" style={{ textDecoration: 'none', color: '#ffffff', cursor: 'pointer' }}>
-                        email@exemplo.com
+                    <a href="mailto:aicollabdev@gmail.com?subject=Assunto%20do%20email&body=Corpo%20da%20mensagem" style={{ textDecoration: 'none', color: '#ffffff', cursor: 'pointer' }}>
+                        aicollabdev@gmail.com
                     </a>
                 </div>
                 <div className="footer-item">

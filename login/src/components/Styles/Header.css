@@ -195,7 +195,6 @@ nav ul li a,nav ul li a:visited {
     text-decoration: none;
 }
 
-/*VER AQUI*/
 nav ul li a{
     background: transparent;
     color: #FFF;
@@ -241,7 +240,7 @@ nav ul li ul li a {
     }
 
     .nav-list.open {
-        height: 210px;
+        height: 260px;
         width: 100%;
     }
 

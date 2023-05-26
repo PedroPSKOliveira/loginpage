@@ -6,6 +6,7 @@ import Container3 from "./components/Container3";
 import Container4 from "./components/Container4";
 import Container5 from "./components/Container5";
 import Footer from "./components/Footer";
+import BrightnessControl from "./components/BrightnessControl";
 
 const Inicial = () => {
 
@@ -32,11 +33,8 @@ const Inicial = () => {
                 <Container3 setCurrentContainer = {setCurrentContainer} />
             )}
             <Container4 />
-            <Container5 />
             <Footer />
-
-
-
+            <BrightnessControl />
         </div>
 
     );

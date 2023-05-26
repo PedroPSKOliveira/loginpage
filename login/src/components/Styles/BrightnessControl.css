@@ -1,0 +1,39 @@
+#brightness-control {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+}
+
+#brightness-control button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.icons-light {
+    width: 20px;
+    height: 20px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.icons-light.active {
+    width: 25px;
+    height: 25px;
+}

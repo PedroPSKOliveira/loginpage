@@ -3,9 +3,10 @@ import Login from './Login';
 import { ToastContainer } from 'react-toastify';
 import ApiPag from './ApiPag';
 import Att from './components/Att';
+import Plan from './components/Plan';
+import BrightnessControl from "./components/BrightnessControl";
 import Inicial from './Inicial';
 import Auth from './Auth';
-import Final from "./Final";
 import LoginPay from "./components/LoginPay";
 import PaymentForm from "./components/PaymentForm";
 import Editor from "./components/Editor";
@@ -20,6 +21,10 @@ import GoogleLogin from "./components/GoogleLogin";
 import GoogleRegister from "./components/GoogleRegister";
 import Header from "./components/Header";
 import PasswordResetPage from "./components/PasswordResetPage";
+import TinyEditor from "./components/TinyEditor";
+import ApiUpdatePag from "./ApiUpdatePag";
+import ApiCancelPag from "./ApiCancelPag";
+
 
 
 
@@ -45,9 +50,10 @@ function App() {
         <Route path='/' element={<Login/>}></Route>
         <Route path='/pagamento' element={<ApiPag/>}></Route>
         <Route path='/atualizar' element={<Att/>}></Route>
+        <Route path='/Plan' element={<Plan/>}></Route>
+        <Route path='/BrightnessControl' element={<BrightnessControl/>}></Route>
         <Route path='/home' element={<Inicial/>}></Route>
         <Route path='/auth' element={<Auth/>}></Route>
-        <Route path='/edicao' element={<Final/>}></Route>
         <Route path={'/first'} element={<LoginPay/>}></Route>
         <Route path={'/pay'} element={<PaymentForm/>}></Route>
         <Route path={'/editor'} element={<Editor/>}></Route>
@@ -61,7 +67,10 @@ function App() {
           <Route path={'/qwrwfasfzdfsdfafsd5'} element={<GoogleLogin/>}></Route>
           <Route path={'/qwrwfasfzsegsdfafhdt6'} element={<GoogleRegister/>}></Route>
           <Route path={'/qwrwfasfzdfafasdsdfsf7'} element={<Header/>}></Route>
-        <Route path={'/reset-password/:id'} element={<PasswordResetPage/>}></Route>
+          <Route path={'/reset-password/:id'} element={<PasswordResetPage/>}></Route>
+        <Route path={'/editu'} element={<TinyEditor/>}></Route>
+        <Route path={'/upgrade'} element={<ApiUpdatePag/>}></Route>
+        <Route path={'/cancel'} element={<ApiCancelPag/>}></Route>
       </Routes>
 
 

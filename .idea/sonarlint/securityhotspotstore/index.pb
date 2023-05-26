@@ -3,20 +3,12 @@ W
 'login/src/components/GoogleRegister.jsx,d\3\d3c5f51c601b9ae5c7a927585c0c995b194dcbba
 X
 (login/src/components/TypingAnimation.jsx,7\8\787bef15223bfdc056952dda4991252e1bd9b4b6
-S
-#login/src/components/Container3.jsx,4\4\44da345fbbb9f5cd5b893b7872a35ae1c8e224d2
 R
 "login/src/components/LoginForm.jsx,3\2\32bc149dacb0d4d1dc83864cd912d9c99ce9ad5f
 O
 login/src/components/Editor.jsx,9\3\935cd8342575a374690627c9b2c349fc794f1227
-O
-login/src/components/Footer.jsx,d\3\d3f87ab785f5b60b278ad641b788dc2dcef56ed8
 T
 $login/src/components/GoogleLogin.jsx,6\c\6cc02799de98b84c29424fd351ec46626c0dd6a9
-U
-%login/src/components/CircleCounter.js,4\e\4e908729c99270aca1215384bcc0a9f37e25d14f
-]
--login/src/components/Styles/CircleCounter.css,8\5\8590189a67aebf533f05015768c1d31019c09363
 S
 #login/src/components/Styles/Pay.css,5\b\5bf77fed935aff46598527c3ad67d41902f1a9ef
 [
@@ -25,16 +17,12 @@ V
 &login/src/components/Styles/Navbar.css,0\e\0e38b8d6eeae3a75a250759f7217486a89582540
 T
 $login/src/components/Styles/Chat.css,0\f\0f1531fe8e6148d9f589ede528872f71e8d98bf9
-Z
-*login/src/components/Styles/TextEditor.css,d\5\d5a934ca4409cc25f302c6128ef3e3c7278c625b
 U
 %login/src/components/Styles/Pulse.css,8\9\89a4724066c5040aaf0199a843cd9c639d7352fe
 V
 &login/src/components/Styles/Footer.css,d\d\dd99654a59a62ef68a33408566eee258ea4012e0
 @
 login/.gitignore,a\f\afdcc304bb6f2b6f50365915ebc068e22e4baab3
-A
-login/src/App.css,7\d\7dd5a5d5fb161466c160f32cd234cf168bc1a748
 A
 login/Server.java,5\3\531f3ef4d0c396f92863a38ce31f662c272ee5a4
 ?
@@ -51,8 +39,6 @@ A
 login/src/Pay.css,f\5\f51efa34f9f3f7a39e64631bc1491a1bc9e73b98
 A
 login/src/Pay.jsx,0\0\00012b8c1fbeeaa6616118ad2de5bab75c6da34b
-D
-login/src/ApiPag.jsx,a\7\a7e0ece55f2266a7330c7739745fc6cf1abdb986
 B
 login/src/Auth.jsx,1\c\1c95d7d1cda41879b42f578bb8a74ddb41819155
 E
@@ -61,15 +47,21 @@ C
 login/src/Final.jsx,5\f\5f44df96fcef7302f2c69b3d0a8a50c4dd0333ab
 J
 login/src/CheckoutForm.jsx,3\8\3836fdabf0f2646ac6997a579cfaf2a4d7e77468
-O
-login/src/components/Upload.jsx,8\e\8e9c7b5d33c8d27f164b6cdb5c742fa4a539a9dd
-E
-login/src/Inicial.jsx,5\6\56931a5d66d39bd8dbb599cf03d9c8bb54c57cda
-K
-login/src/AudioRecorder.jsx,8\a\8aab4dbba7ab07d8784b6193e90f7f25e342c3c3
 M
 login/src/reportWebVitals.jsx,6\a\6a0c2b69cf678de205f48fc45fafa22eae6b125b
-R
-"login/src/components/Container.jsx,8\2\82c9eb9495018c66d88bc3450ca59e1158f27bd7
 U
 %login/src/components/RegisterForm.jsx,1\f\1f6a8739c457e4831792029874d6aaa04ecbae82
+B
+login/src/index.js,2\9\29dd77eb52c52844d2d96fb8ff8a98cae8c2ca58
+G
+login/public/index.html,a\1\a1f7fda28ec42fac7e3af158796c4917f797426e
+V
+&login/src/components/Styles/Cartao.css,4\6\46552f2f2d3974441b28a68a480b5f1470b9a7dd
+U
+%login/src/components/planoCliente.jsx,c\f\cf9b1464f38fdcaad20c86a1e2c77359cc1256f0
+\
+,login/src/components/Styles/planoCliente.css,2\c\2c4dd4c1d37bdc82eb68f2cd3a57112642787a62
+J
+login/src/Inicial.test.jsx,2\e\2ea4faa7bab144c50e2c62cdfba396694cb7825e
+J
+login/src/SplashScreen.jsx,f\9\f9e9714216ad7caea8b054d4779ce409548f61e9

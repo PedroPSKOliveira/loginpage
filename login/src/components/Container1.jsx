@@ -25,26 +25,16 @@ const Container1 = ({setCurrentContainer}) => {
     const [isUploading, setIsUploading] = useState(false);
 
 
-    useEffect(() => {
-        fetch(`https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/pay/find`,
-            {
-                method: 'GET',
-                headers: {
-                    "Authorization": Cookies.get("Authorization"),
-                    'Content-Type': 'application/json',
-                },
-            }).then((res) => {
-            return res.json();
-        }).then((res) => {
-                console.log(res);
-                setUserPlan(res.data.signature);
-                ;
 
-            }
-        ).catch((err) => {
-            console.log(err);
-        })
-    }, []);
+    // Definindo o estado da aplicação
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setUserPlan(Cookies.get("userPlan"));
+        }, 2000); // delay of 2 second
+
+        // Clean up function
+        return () => clearTimeout(timeoutId);
+    }, [Cookies.get("userPlan")]);
 
 
     const handleFileChange = (event) => {
@@ -62,9 +52,7 @@ const Container1 = ({setCurrentContainer}) => {
         event.preventDefault();
         console.log(pet, lim, tutela);
         setIsFetching(true);
-        console.log(isFetching);
         try {
-            console.log(pet, lim, tutela)
             fetch('https://peticiona-8a3b4bb2-c0c7-4a4e-b616-bc105682467b.up.railway.app/api/peticao/previa', {
                 method: 'POST',
                 headers: {
@@ -82,7 +70,7 @@ const Container1 = ({setCurrentContainer}) => {
                 })
                 .then(async data => {
                     console.log(data);
-                    if (data.code === 0) {
+                    if (data.code === 200) {
                         let id = data.data;
                         Cookies.set('id', data.data);
                         console.log(id);
@@ -135,43 +123,10 @@ const Container1 = ({setCurrentContainer}) => {
         }
     };
 
-        const speakText = () => {
-            let synth = window.speechSynthesis;
+    const handleUploadFile = async (file) => {
+        await handleUploadAudio(file);
+    }
 
-            let id = setInterval(() => {
-                if (synth.getVoices().length !== 0) {
-                    let voices = synth.getVoices();
-
-                    let voice = voices[1];
-
-                    let utterance = new SpeechSynthesisUtterance(`
-            Olá, tudo bem? 
-            Sou a Vitória, sua assessora jurídica. 
-            Estou aqui para descrever a página e te guiar.
-            A página que você está agora é composta por uma barra de navegação, onde
-            você encontra seu nome e email, uma opção para você atualizar os seus dados,
-            uma opção para você verificar o plano adquirido e uma opção para sair da sua conta.
-            Abaixo dessa barra, você estará no criador de petições, onde os fatos
-            serão descritos e formatados, e dependendo do seu plano, você poderá enviar
-            arquivos e gravar áudio. 
-            Você também possui um controlador de interações e botões de ajuda.
-            Ao descrever e enviar os fatos, você poderá escolher entre ver os seus direitos, ou
-            gerar sua petição.
-            Abaixo do criador de petições você possui um espaço onde poderá falar comigo e tirar qualquer dúvida.
-            Por último você pode encontrar nossos planos de compra para interagir com os nossos serviços.
-            Nosso contato e endereço se encontram ao final da página, precisando de qualquer coisa, entre em contato.
-            Agora você está pronto para iniciar sua experiência com a Smart Petição.
-            Foi um prazer te ajudar.
-          `);
-
-                    utterance.voice = voice;
-
-                    synth.speak(utterance);
-
-                    clearInterval(id);
-                }
-            }, 10);
-        }
 
     return (
         <section className="container">
@@ -179,33 +134,45 @@ const Container1 = ({setCurrentContainer}) => {
                 <div className="textarea-wrapper">
                 <form action={"#!"}>
                 <div className="others">
-                    <h2>Criador de petições</h2>
-                    <img src="https://img.icons8.com/ios-filled/50/null/file-2.png" alt="ícone de arquivo"/>
+                    <div className="container-title">
+                        <h2>Criador de petições</h2>
+                        <img className="icon-textarea" src="https://img.icons8.com/ios-filled/50/null/file-2.png" alt="ícone de arquivo"/>
+                    </div>
                     <br/>
-                    <h1>
-
-                    </h1>
                     <p>Conte-me os fatos. Digite as informações de forma clara e objetiva. Certifique-se de que as
                         informações estejam completas e corretas, para que possamos atender adequadamente à sua
                         solicitação.</p>
                     <div className="audio-buttons-container">
                         <div className="checkbox">
-                            <label>Lim</label>&nbsp;
-                            <input
-                                type="checkbox"
-                                id="liminar"
-                                name="liminar"
-                                checked={lim}
-                                onChange={(e) => setLim(e.target.checked)}
-                            />&nbsp;&nbsp;
-                            <label>Tut</label>&nbsp;
-                            <input
-                                type="checkbox"
-                                id="tutela"
-                                name="tutela"
-                                checked={tutela}
-                                onChange={(e) => setTutela(e.target.checked)}
-                            />&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label className="check">Liminar
+                                <input
+                                    type="checkbox"
+                                    id="liminar"
+                                    name="liminar"
+                                    checked={lim}
+                                    onChange={(e) => setLim(e.target.checked)}
+                                />
+                                <svg viewBox="0 0 64 64" height="1em" width="2em">
+                                    <path
+                                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                                        pathLength="575.0541381835938" className="path"></path>
+                                </svg>
+                            </label>&nbsp;
+
+                            <label className="check">Tutela
+                                <input
+                                    type="checkbox"
+                                    id="tutela"
+                                    name="tutela"
+                                    checked={tutela}
+                                    onChange={(e) => setTutela(e.target.checked)}
+                                />
+                                <svg viewBox="0 0 64 64" height="1em" width="2em">
+                                    <path
+                                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                                        pathLength="575.0541381835938" className="path"></path>
+                                </svg>
+                            </label>&nbsp;
                         </div>
                         {/* Exibe o botão de gravação de áudio apenas se o plano do usuário for 'Gold' */}
                         {(userPlan === "ENTERPRISE" || userPlan === "SEMESTRAL_ENTERPRISE") && (
@@ -215,9 +182,10 @@ const Container1 = ({setCurrentContainer}) => {
                         )}
                         {(userPlan === 'SEMESTRAL_PREMIUM' || userPlan === 'SEMESTRAL_ENTERPRISE' || userPlan === 'PREMIUM' || userPlan === 'ENTERPRISE') && (
                             <div className="audio-button">
-                                <Upload />
+                                <Upload onUpload={handleUploadFile}/>
                             </div>
                         )}
+
                     </div>
                     <div className="icons-textarea">
                         <i className="fa-solid fa-microphone-lines mic" id="microphone" style={{color: '#203250'}}></i>
@@ -229,14 +197,14 @@ const Container1 = ({setCurrentContainer}) => {
                         maxLength="3000"
                         value={pet}
                         onChange={(e) => {
-                            if (e.target.value.length === 2800) {
+                            if (e.target.value.length === 7800) {
                                 toast.warning("Você está se aproximando do limite de caracteres!");
-                            } else if (e.target.value.length >= 3000) {
+                            } else if (e.target.value.length >= 8000) {
                                 toast.error("Você atingiu o limite de caracteres!");
                             }
 
                             // Limitar o valor a 3000 caracteres
-                            setPet(e.target.value.slice(0, 3000));
+                            setPet(e.target.value.slice(0, 8000));
                         }}
                     />
                     <div className="submit-button-pet" style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -244,7 +212,7 @@ const Container1 = ({setCurrentContainer}) => {
                                 className="button"
                                 id="chatbot-send-btn"
                                 type="submit"
-                                    style={{backgroundColor :"#040e36", height: "47px"}}
+                                style={{backgroundColor :"#030957"}}
                                 onClick={handleSubmit2}>
                                 Enviar
                             </button>

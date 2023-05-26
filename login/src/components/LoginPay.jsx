@@ -1,28 +1,71 @@
 import React, {useEffect, useState} from "react";
 import "./Styles/Card.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMicrophoneLines, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
+import { faTimesCircle, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
-const LoginPay = () => {
+import {toast} from "react-toastify";
 
 
+const PricingCard = ({ plano, setPlanoSelecionado, isCurrentPlan, isSemestral }) => {
+    return (
+        <div className="block">
+            {isSemestral && <div className="ribbon">{plano.desc}</div>}
+            <div className="header">
+                <p className="title">{plano.titulo}</p>
+                <div className="price-container">
+                    <span>R$</span><span className="price">{plano.preco}</span>
+                </div>
+                <p className="final-value">{plano.total}</p>
+            </div>
+            <div>
+
+                <ul className="lists">
+                    <li className="list">
+                        <FontAwesomeIcon icon={faCircleCheck} className="card-icon" style={{color: "#3c12d4"}} />
+                        <span><strong>{plano.interacoes}</strong> interações</span>
+                    </li>
+                    <li className="list">
+                            <span className="icon">
+                                <FontAwesomeIcon  className="card-icon" icon={plano.arquivo ? faCircleCheck : faTimesCircle} style={{ color: plano.arquivo ? "#3c12d4" : "#3c12d4", }} />
+                            </span>
+                        <span>Importação de<strong> arquivo</strong></span>
+                    </li>
+                    <li className="list">
+                            <span className="icon">
+                                <FontAwesomeIcon  className="card-icon" icon={plano.audio ? faCircleCheck : faTimesCircle} style={{ color: plano.audio ? "#3c12d4" : "#3c12d4", }} />
+                            </span>
+                        <span>Envio de<strong> áudio </strong></span>
+                    </li>
+                </ul>
+                <div className="button-container">
+                    <a className="button" onClick={(e) => {e.preventDefault(); setPlanoSelecionado(plano);}}>Adquirir Plano</a>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+
+const Container5 = () => {
+
+    const [planoAtual, setPlanoAtual] = useState(Cookies.get("Assinatura"));
     const [isSemestral, setIsSemestral] = useState(false);
     const [planoSelecionado, setPlanoSelecionado] = useState(null);
     const navigate = useNavigate();
+    console.log(planoAtual);
 
     const planosMensais = [
-        { preco: 'R$79.90', titulo: 'BASIC', value: 'BASIC', interacoes: 60, arquivo: false, audio: false },
-        { preco: 'R$199.75', titulo: 'PREMIUM', value: 'PREMIUM', interacoes: 150, arquivo: true, audio: false },
-        { preco: 'R$399.50', titulo: 'ENTERPRISE', value: 'ENTERPRISE', interacoes: 300, arquivo: true, audio: true },
+        { preco: '79,90', titulo: 'STARTER', value: 'BASIC', interacoes: 60, arquivo: false, audio: false, isCurrentPlan: planoAtual === 'STARTER' },
+        { preco: '199,75', titulo: 'MASTER', value: 'PREMIUM', interacoes: 150, arquivo: true, audio: false, isCurrentPlan: planoAtual === 'MASTER' },
+        { preco: '399,50', titulo: 'ULTIMATE', value: 'ENTERPRISE', interacoes: 300, arquivo: true, audio: true, isCurrentPlan: planoAtual === 'ULTIMATE' },
         // Adicione mais planos mensais aqui
     ];
 
     const planosSemestrais = [
-        { preco: 'R$407.40', titulo: 'BASIC+', value: 'SEMESTRAL_BASIC', interacoes: 360, arquivo: false, audio: false },
-        { preco: 'R$1018.50', titulo: 'PREMIUM+', value: 'SEMESTRAL_PREMIUM',interacoes: 900, arquivo: true, audio: false },
-        { preco: 'R$2037.00', titulo: 'ENTERPRISE+', value: 'SEMESTRAL_ENTERPRISE', interacoes: 1800, arquivo: true, audio: true },
+        { preco: '67,90', total:'Total R$407,40', desc:'15% DE DESCONTO', titulo: 'STARTER+', value: 'SEMESTRAL_BASIC', interacoes: 360, arquivo: false, audio: false, isCurrentPlan: planoAtual === 'SEMESTRAL_STARTER' },
+        { preco: '169,75', total:'Total R$1.018,50', desc:'15% DE DESCONTO', titulo: 'MASTER+', value: 'SEMESTRAL_PREMIUM',interacoes: 900, arquivo: true, audio: false, isCurrentPlan: planoAtual === 'SEMESTRAL_MASTER' },
+        { preco: '339,50', total:'Total R$2037.00', desc:'15% DE DESCONTO', titulo: 'ENTERPRISE+', value: 'SEMESTRAL_ENTERPRISE', interacoes: 1800, arquivo: true, audio: true, isCurrentPlan: planoAtual === 'SEMESTRAL_ENTERPRISE' },
         // Adicione mais planos semestrais aqui
     ];
 
@@ -33,61 +76,46 @@ const LoginPay = () => {
             // Agora você pode acessar as informações do plano selecionado aqui
             console.log(planoSelecionado.titulo)
             Cookies.set('plano', planoSelecionado.value);
-            navigate('/pagamento');
+            Cookies.set('planoc', planoSelecionado.titulo);
+
+            if (planoSelecionado.value !== planoAtual) {
+                console.log('Plano selecionado: '+planoSelecionado.value)
+                console.log('Plano atual: '+planoAtual)
+                navigate('/pagamento');
+            }else
+            {
+                toast.error('Você já possui este plano')
+            }
         }
     }, [planoSelecionado]);
 
-    return (
-        <section className="container">
-            <div>
-                <h2 className="title" style={{textAlign: "center"}}>Vimos que ainda não possui um plano, selecione um abaixo para continuar</h2><br/>
 
-                <button onClick={() => setIsSemestral(!isSemestral)} className="btn btn-outline-dark">
-                {isSemestral ? 'Ver Planos Mensais' : 'Ver Planos Semestrais'}
+    return (
+        <section className="container5">
+            <h2>
+                Vimos que ainda não possui um plano em nossa plataforma. Escolha um plano para começar a usar o nosso sistema.
+            </h2>
+
+            <button
+                onClick={() => setIsSemestral(!isSemestral)}
+                className={`toggle-button ${isSemestral ? 'toggle-button-semestral' : ''}`}
+                id="toggleButton"
+            >
+                <div className={`button-slider ${isSemestral ? 'button-slider-semestral' : ''}`}></div>
+                <span className={`monthly ${isSemestral ? '' : 'selected'}`}>Mensal</span>
+                <span className={`semiannual ${isSemestral ? 'selected' : ''}`}>Semestral</span>
             </button>
-            </div>
             <div className="block-container">
-                {planosAtuais.map((plano, index) => (
-                    <div className="block" key={index}>
-                        <div className="plan">
-                            <div className="inner">
-                                <span className="pricing">
-                                    <span>{plano.preco} <small>/ {isSemestral ? 's' : 'm'}</small></span>
-                                </span>
-                                <p className="title">{plano.titulo}</p>
-                                <p className="info">This plan is for those who have a team already and running a large
-                                    business.</p>
-                                <ul className="features">
-                                    <li>
-                                        <span className="icon">
-                                            <FontAwesomeIcon icon={faCheck} style={{ color: "#0ff90b", }} />
-                                        </span>
-                                        <span><strong>{plano.interacoes}</strong> interações</span>
-                                    </li>
-                                    <li>
-                                        <span className="icon">
-                                            <FontAwesomeIcon icon={plano.arquivo ? faCheck : faTimes} style={{ color: plano.arquivo ? "#0ff90b" : "#ff0000", }} />
-                                        </span>
-                                        <span>Envio de<strong> arquivo</strong></span>
-                                    </li>
-                                    <li>
-                                        <span className="icon">
-                                            <FontAwesomeIcon icon={plano.audio ? faCheck : faTimes} style={{ color: plano.audio ? "#0ff90b" : "#ff0000", }} />
-                                        </span>
-                                        <span>Envio de<strong> áudio de maneira livre</strong></span>
-                                    </li>
-                                </ul>
-                                <div className="action">
-                                    <a className="button" onClick={(e) => {e.preventDefault(); setPlanoSelecionado(plano);}}>Adquirir Plano</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {planosAtuais.map((plano) => (
+                    <PricingCard key={plano.value} plano={plano} setPlanoSelecionado={setPlanoSelecionado} isCurrentPlan={plano.isCurrentPlan} isSemestral={isSemestral} />
                 ))}
+
+
+
             </div>
         </section>
     );
 };
 
 
-export default LoginPay;
+export default Container5;

@@ -20,7 +20,7 @@ const PaymentForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let plano = Cookies.get('plano')
-        let [year, month] = expiry.split('/')
+        let [year, month] = expiry.split('-')
         console.log(name, number,month, year , cvv, plano)
         fetch(`https://gateway-d6c99606-f18c-11ed-a05b-0242ac120003.up.railway.app/api/pay/subscribe?sign=${plano}`, {
             method: 'POST',
@@ -59,8 +59,7 @@ const PaymentForm = () => {
     };
 
     const handleExpiryChange = (event) => {
-        const value = event.target.value.replace(/[^\d]/g, '');
-        setExpiry(value.length > 2 ? value.slice(0, 2) + '/' + value.slice(2) : value);
+        setExpiry(event.target.value);
     };
 
     const handleCvvChange = (event) => {
@@ -114,9 +113,9 @@ const PaymentForm = () => {
                     required
                 />
 
-                <label htmlFor="expiry">Data de validade</label>
+                <label htmlFor="expDate">Data de validade</label>
                 <input
-                    type="text"
+                    type="month"
                     id="expiry"
                     maxLength="5"
                     value={expiry}
